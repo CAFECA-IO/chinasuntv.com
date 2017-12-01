@@ -58,6 +58,16 @@ export default function (app)
         req.i18n.translator.language = req.i18n.language;
         next();
     });
+    app.use((req, res, next) =>
+    {
+        res.result = {
+            result: 0,
+            errorCode: 0,
+            message: '',
+            data: {}
+        };
+        next();
+    });
 
     // webpack HMR
     if (process.env.NODE_ENV === 'development')
