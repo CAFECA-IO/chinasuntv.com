@@ -47,13 +47,13 @@ export default function (app)
     });
     app.use((req, res, next) =>
     {
-        if (undefined === req.universalCookies.get('tideiSun'))
+        if (undefined === req.universalCookies.get('iSuntvLive'))
         {
-            req.universalCookies.set('tideiSun', req.i18n.language);
+            req.universalCookies.set('iSuntvLive', req.i18n.language);
         }
-        else if (req.universalCookies.get('tideiSun'))
+        else if (req.universalCookies.get('iSuntvLive'))
         {
-            req.i18n.language = req.universalCookies.get('tideiSun');
+            req.i18n.language = req.universalCookies.get('iSuntvLive');
         }
         req.i18n.translator.language = req.i18n.language;
         next();
