@@ -1,0 +1,6 @@
+cert/*
+uploads/*
+logs/*
+node_modules/*
+.eslintcache
+package-lock.json

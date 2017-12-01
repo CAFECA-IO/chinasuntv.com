@@ -1,0 +1,78 @@
+header
+{
+    position: fixed;
+    z-index: 1;
+    top: 0;
+
+    width: 100%;
+
+    transition: background-color .3s;
+
+    background-image: linear-gradient(180deg, rgba(0,0,0,.7) 10%, transparent);
+
+     > div
+    {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        height: 60px;
+
+         > div.f
+        {
+            flex: .3;
+
+            > a
+            {
+                > div.logo
+               {
+                   width: 113px;
+                   height: 38px;
+
+                   cursor: pointer;
+
+                   background-image: url('/asset/img/xplay.svg');
+               }
+            }
+        }
+
+        > div.langauge
+       {
+           position: relative;
+
+           &::after
+           {
+               font-family: FontAwesome;
+               font-size: 16px;
+
+               position: absolute;
+               top: 2px;
+               left: 60px;
+
+               display: block;
+
+               content: '\f107';
+
+               color: #9b9b9b;
+           }
+
+
+            > select
+           {
+               font-size: 12px;
+
+               width: 80px;
+               height: 23px;
+               padding: 2px 10px;
+
+               cursor: pointer;
+
+               color: #9b9b9b;
+               border: 1px solid #9b9b9b;
+               background-color: #333;
+
+               appearance: none;
+           }
+       }
+    }
+}

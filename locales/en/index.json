@@ -1,0 +1,14 @@
+{
+    "paymentTitle": "X-Payment",
+    "paymentTitle1": "Digital Currency Payment Flow Module",
+    "paymentDesc": "X-Payment is the payment flow module especially for the digital currency and compatible with ETH, BTC, XPA, etc. It not only provides the most advanced third party payment technology with privacy and security but also includes the streaming agreements required by content platform providers and the anonymous wallets required by users.",
+    "trustTitle": "X-Trust",
+    "trustTitle1": "Blockchain Copyright Management Technology",
+    "trustDesc": "X-Trust is a copyright system combining several technologies specialized for digital content creation. We use the advanced indexing technology to analyze each digital content including the analysis of each section of the texts and the audio and video characteristic of each clip and register these digital assets on the blockchains to increase the trust between the transaction and the content providers.",
+    "streamingTitle": "X-Streaming",
+    "streamingTitle1": "Streaming Technology",
+    "streamingDesc": "X-Streaming has defined a new type of authorization possibilities for the video and audio streaming of digital contents. We integrate the concept of time into the authorization mechanism, which is different from the traditional authorization mechanism of individual files so that the digital content streaming will adopt diverse types of authorization and combination of creative work.",
+    "aiTitle": "AI Artificial Intelligence",
+    "aiTitle1": "",
+    "aiDesc": "XPLAY Tech's artificial intelligence technology is based on the neural network algorithm and deep learning techniques and has launched a multi-language human and machine translation platform assisted by the blockchains that continue intelligence evolution so that the users can break the language barrier, the visual stimulation is enhanced and more efforts are made on the visual experience of digital contents."
+}
