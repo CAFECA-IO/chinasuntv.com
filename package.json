@@ -64,7 +64,9 @@
     "serialize-javascript": "^1.4.0",
     "sitemap": "^1.13.0",
     "spdy": "^3.4.7",
-    "universal-cookie-express": "^2.1.2"
+    "superagent": "^3.8.1",
+    "universal-cookie-express": "^2.1.2",
+    "xls-to-json": "^0.4.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.6",

@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import xplaytech from './xplaytech';
+import chinaSuntv from './chinaSuntv';
 
 const rootReducer = combineReducers({
-    xplaytech
+    xplaytech,
+    chinaSuntv
 });
 
 export default rootReducer;
