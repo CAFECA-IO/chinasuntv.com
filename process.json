@@ -1,5 +1,5 @@
 {
-    "name": "tideiSun",
+    "name": "iSuntvLive",
     "script": "build/server.js",
     "log_date_format": "YYYY-MM-DD",
     "watch": [
