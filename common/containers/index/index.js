@@ -31,7 +31,7 @@ function mapDispatchToProps(dispatch)
 }
 
 @translate([], { wait: isNode ? false : true })
-class Index extends React.PureComponent
+class Index extends React.Component
 {
     constructor(props)
     {
