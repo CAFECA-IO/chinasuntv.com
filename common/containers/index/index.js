@@ -1,7 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import isNode from 'detect-node';
 import DocumentMeta from 'react-document-meta';
@@ -9,40 +7,21 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 // import Slider from '../../components/slider/slider';
 import { meta as metaObj } from '../../constants/meta';
-import * as chinaSuntvAction from '../../actions/chinaSuntv';
 
 if (!isNode)
 {
     require('./index.scss');
 }
 
-function mapStateToProps()
-{
-    return {};
-}
-
-function mapDispatchToProps(dispatch)
-{
-    return {
-        actions: {
-            chinaSuntv: bindActionCreators(chinaSuntvAction, dispatch)
-        }
-    };
-}
 
 @translate([], { wait: isNode ? false : true })
-class Index extends React.PureComponent
+class Index extends React.Component
 {
     constructor(props)
     {
         super(props);
         this.state = {};
         this.meta = metaObj;
-    }
-
-    componentDidMount()
-    {
-        this.props.actions.chinaSuntv.getChinaSuntv();
     }
 
     render()
@@ -56,9 +35,46 @@ class Index extends React.PureComponent
 
                 <Header />
 
-                {/* <div className="content">
-
-                </div> */}
+                <div className="content">
+                    <div className="chinaSuntv">
+                        <video src="https://www.w3schools.com/html/mov_bbb.mp4" />
+                        <div className="nowPlaying">
+                            <div>Now Playing</div>
+                            <div>世紀天才</div>
+                        </div>
+                        <div className="preNext">
+                            <div>
+                                <span>00:00</span>
+                                <span>01:00</span>
+                                <span>02:00</span>
+                            </div>
+                            <div>
+                                <span><i className="fa fa-circle" aria-hidden="true" /></span>
+                                <span><i className="fa fa-circle center" aria-hidden="true" /></span>
+                                <span><i className="fa fa-circle" aria-hidden="true" /></span>
+                            </div>
+                            <div>
+                                <span>紀錄片</span>
+                                <span>人物傳記</span>
+                                <span>歷史人文</span>
+                            </div>
+                            <div>
+                                <span>輝煌中原</span>
+                                <span>世紀天才</span>
+                                <span>文明的傳承</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="programList">
+                        program list
+                    </div>
+                    <div className="aboutUs">
+                        about us
+                    </div>
+                    <div className="contactUs">
+                        contact Us
+                    </div>
+                </div>
 
                 <Footer />
 
@@ -72,8 +88,7 @@ Index.defaultProps = {
 };
 
 Index.propTypes = {
-    // t: PropTypes.func.isRequired,
-    actions: PropTypes.object.isRequired
+    t: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index);
+export default Index;

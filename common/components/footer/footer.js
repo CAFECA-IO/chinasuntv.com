@@ -26,20 +26,7 @@ class Footer extends React.Component
         return (
             <footer>
                 <div>
-                    {/* logoArea */}
-                    <div className="logoArea">
-                        <div>© 2017 XPlay, Inc</div>
-                    </div>
-
-                    {/* other */}
-                    <div className="other">
-                        <div className="socail">
-                            <a href="https://www.instagram.com/xiaobianyang/" target="_blank" rel="noopener noreferrer"><i className="fa fa-instagram" /></a>
-                            <a href="https://twitter.com/XplayTech" target="_blank" rel="noopener noreferrer"><i className="fa fa-twitter" /></a>
-                            <a href="https://www.facebook.com/XplayTech-1077147932422732/" target="_blank" rel="noopener noreferrer"><i className="fa fa-facebook" /></a>
-                            <a href="https://www.linkedin.com/company/13449421/" target="_blank" rel="noopener noreferrer"><i className="fa fa-linkedin" /></a>
-                        </div>
-                    </div>
+                    <div><span>TIDEiSUN</span>Copyright © 2017 TideiSun Group 泰德陽光集團. All rights reserved.</div>
                 </div>
             </footer>
         );
