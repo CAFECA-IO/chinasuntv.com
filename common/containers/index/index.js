@@ -39,7 +39,7 @@ class Index extends React.Component
                     <div className="chinaSuntv">
                         <video src="https://www.w3schools.com/html/mov_bbb.mp4" />
                         <div className="nowPlaying">
-                            <div>Now Playing</div>
+                            <div><i className="fa fa-circle" aria-hidden="true" />Now Playing</div>
                             <div>世紀天才</div>
                         </div>
                         <div className="preNext">
