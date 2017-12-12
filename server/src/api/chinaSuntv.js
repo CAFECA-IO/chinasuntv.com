@@ -20,6 +20,7 @@ export default
             output: null, // output json
         }, (err, result) => {
             let arr = [];
+            let data = {};
             let message;
             let resultCode;
 
@@ -44,12 +45,33 @@ export default
                     });
                     arr.push(obj);
                 }
+
+                let week = [];
+                let weekData = {};
+                arr.map((item) => {
+                    const date = item.PlayTime.split(' ')[0];
+                    if (date !== '')
+                    {
+                        if (week.indexOf(date) === -1)
+                        {
+                            week.push(date);
+                        }
+                        if (!Array.isArray(weekData[date]))
+                        {
+                            weekData[date] = [];
+                        }
+                        weekData[date].push(item);
+                    }
+                    return true;
+                });
+                data.week = week;
+                data.weekInfo = weekData;
             }
 
             res.json({
                 result: resultCode,
                 message,
-                data: arr
+                data
             });
         });
     }

@@ -1,16 +1,31 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 import isNode from 'detect-node';
 import DocumentMeta from 'react-document-meta';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
+import ChinaSuntv from '../../components/chinaSuntv/chinaSuntv';
+import ProgramList from '../../components/programList/programList';
 // import Slider from '../../components/slider/slider';
 import { meta as metaObj } from '../../constants/meta';
 
 if (!isNode)
 {
     require('./index.scss');
+}
+
+function mapStateToProps(state)
+{
+    return {
+        chinaSuntv: state.chinaSuntv
+    };
+}
+
+function mapDispatchToProps()
+{
+    return {};
 }
 
 
@@ -36,38 +51,9 @@ class Index extends React.Component
                 <Header />
 
                 <div className="content">
-                    <div className="chinaSuntv">
-                        <video src="https://www.w3schools.com/html/mov_bbb.mp4" />
-                        <div className="nowPlaying">
-                            <div><i className="fa fa-circle" aria-hidden="true" />Now Playing</div>
-                            <div>世紀天才</div>
-                        </div>
-                        <div className="preNext">
-                            <div>
-                                <span>00:00</span>
-                                <span>01:00</span>
-                                <span>02:00</span>
-                            </div>
-                            <div>
-                                <span><i className="fa fa-circle" aria-hidden="true" /></span>
-                                <span><i className="fa fa-circle center" aria-hidden="true" /></span>
-                                <span><i className="fa fa-circle" aria-hidden="true" /></span>
-                            </div>
-                            <div>
-                                <span>紀錄片</span>
-                                <span>人物傳記</span>
-                                <span>歷史人文</span>
-                            </div>
-                            <div>
-                                <span>輝煌中原</span>
-                                <span>世紀天才</span>
-                                <span>文明的傳承</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="programList">
-                        program list
-                    </div>
+                    <ChinaSuntv data={this.props.chinaSuntv.info} />
+
+                    <ProgramList data={this.props.chinaSuntv.info} />
                     <div className="aboutUs">
                         about us
                     </div>
@@ -83,12 +69,9 @@ class Index extends React.Component
     }
 }
 
-Index.defaultProps = {
-    t: () => {},
-};
-
 Index.propTypes = {
-    t: PropTypes.func.isRequired
+    // t: PropTypes.func.isRequired,
+    chinaSuntv: PropTypes.object.isRequired
 };
 
-export default Index;
+export default connect(mapStateToProps, mapDispatchToProps)(Index);
