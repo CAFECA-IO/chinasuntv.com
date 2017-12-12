@@ -7,6 +7,7 @@ import isNode from 'detect-node';
 import DocumentMeta from 'react-document-meta';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
+import About from '../../components/about/about';
 // import Slider from '../../components/slider/slider';
 import { meta as metaObj } from '../../constants/meta';
 import * as chinaSuntvAction from '../../actions/chinaSuntv';
@@ -55,6 +56,8 @@ class Index extends React.PureComponent
                 <DocumentMeta {...this.meta} />
 
                 <Header />
+
+                <About />
 
                 {/* <div className="content">
 
