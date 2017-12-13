@@ -9,6 +9,7 @@ import Footer from '../../components/footer/footer';
 import ChinaSuntv from '../../components/chinaSuntv/chinaSuntv';
 import ProgramList from '../../components/programList/programList';
 import Contact from '../../components/contact/contact';
+import About from '../../components/about/about';
 // import Slider from '../../components/slider/slider';
 import { meta as metaObj } from '../../constants/meta';
 
@@ -55,9 +56,9 @@ class Index extends React.Component
                     <ChinaSuntv data={this.props.chinaSuntv.info} />
 
                     <ProgramList data={this.props.chinaSuntv.info} />
-                    <div className="aboutUs">
-                        about us
-                    </div>
+
+                    <About />
+
                     <Contact />
                 </div>
 

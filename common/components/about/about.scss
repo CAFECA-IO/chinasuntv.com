@@ -1,0 +1,72 @@
+section
+{
+    color: #f5a623;
+    background-color: #000;
+
+    .part
+    {
+        display: inline-flex;
+
+        color: #fff;
+        @media (max-width: 480px)
+        {
+            flex-direction: column;
+        }
+    }
+
+    .rectangle
+    {
+        width: 50%;
+        @media (max-width: 480px)
+        {
+            width: 100%;
+        }
+    }
+
+    .title
+    {
+        font-size: 8.5px;
+        font-weight: 500;
+
+        display: inline-block;
+
+        margin: 20px;
+
+        text-align: justify;
+    }
+
+    .content
+    {
+        font-size: 7.5px;
+        line-height: 1.8;
+
+        margin: 15px;
+
+        text-align: center;
+        text-align: justify;
+    }
+
+    .rect_yellow
+    {
+        display: inline-block;
+
+        width: 2px;
+        height: 14px;
+
+        background-color: #ffb742;
+    }
+
+    .rect
+    {
+        position: relative;
+        top: -2px;
+        left: 15px;
+
+        display: inline-block;
+
+        width: 8px;
+        height: 3px;
+
+        background-color: #fff;
+    }
+}
