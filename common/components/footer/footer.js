@@ -26,7 +26,10 @@ class Footer extends React.Component
         return (
             <footer>
                 <div>
-                    <div><span>TIDEiSUN</span>Copyright © 2017 TideiSun Group 泰德陽光集團. All rights reserved.</div>
+                    <div>
+                        <div>TIDEiSUN</div>
+                        <div>Copyright © 2017 TideiSun Group 泰德陽光集團. All rights reserved.</div>
+                    </div>
                 </div>
             </footer>
         );

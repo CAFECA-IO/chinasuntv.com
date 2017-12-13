@@ -8,6 +8,7 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import ChinaSuntv from '../../components/chinaSuntv/chinaSuntv';
 import ProgramList from '../../components/programList/programList';
+import Contact from '../../components/contact/contact';
 // import Slider from '../../components/slider/slider';
 import { meta as metaObj } from '../../constants/meta';
 
@@ -57,9 +58,7 @@ class Index extends React.Component
                     <div className="aboutUs">
                         about us
                     </div>
-                    <div className="contactUs">
-                        contact Us
-                    </div>
+                    <Contact />
                 </div>
 
                 <Footer />
