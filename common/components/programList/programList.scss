@@ -52,11 +52,14 @@
                 cursor: pointer;
             }
 
-             > span
+            > div
             {
-                font-size: 17px;
+                > span
+               {
+                   font-size: 17px;
 
-                margin-left: 2px;
+                   margin-left: 2px;
+               }
             }
         }
     }

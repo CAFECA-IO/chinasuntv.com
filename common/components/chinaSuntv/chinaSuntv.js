@@ -19,11 +19,12 @@ class ChinaSuntv extends React.Component
 
     render()
     {
+        // console.log(document.getElementsByClassName('scroll'));
         return (
             <div className="c_chinaSuntv">
-                <video src="https://www.w3schools.com/html/mov_bbb.mp4" />
+                <video autoPlay src="https://stream.isuntv.com/680k/mid_video_index.m3u8" />
                 <div className="nowPlaying">
-                    <div><i className="fa fa-circle" aria-hidden="true" />Now Playing</div>
+                    <div>Now Playing</div>
                     <div>世紀天才</div>
                 </div>
                 <div className="preNext">
@@ -33,9 +34,9 @@ class ChinaSuntv extends React.Component
                         <span>02:00</span>
                     </div>
                     <div>
-                        <span><i className="fa fa-circle" aria-hidden="true" /></span>
-                        <span><i className="fa fa-circle center" aria-hidden="true" /></span>
-                        <span><i className="fa fa-circle" aria-hidden="true" /></span>
+                        <div><div /></div>
+                        <div><div className="center" /></div>
+                        <div><div /></div>
                     </div>
                     <div className="programTag">
                         <div><span>紀錄片</span></div>

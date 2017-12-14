@@ -5,12 +5,14 @@
     justify-content: center;
 
     width: 75%;
+    margin-top: 70px;
 
     color: #fff;
 
     @media (max-width: 767px)
     {
         width: 100%;
+        margin-top: 0;
     }
 
      > video
@@ -32,14 +34,27 @@
             {
                 font-size: 12px;
 
-                margin-top: 15px;
+                margin-top: 10px;
                 margin-bottom: 10px;
+                margin-left: 15px;
 
                 color: #ff0221;
 
-                i
+                &:before
                 {
-                    margin-right: 10px;
+                    position: relative;
+                    top: 10px;
+                    right: 15px;
+
+                    display: block;
+
+                    width: 8px;
+                    height: 8px;
+
+                    content: '';
+
+                    border-radius: 50%;
+                    background-color: red;
                 }
             }
 
@@ -66,25 +81,85 @@
 
             &:nth-child(2)
             {
+                display: flex;
+                align-items: center;
+
                 padding-top: 5%;
                 padding-bottom: 5%;
 
-                 > span
+                &:after
                 {
-                    font-size: 12px;
+                    position: absolute;
 
-                    color: #9b9b9b;
+                    display: block;
 
-                     > i
+                    width: 50%;
+
+                    content: '';
+
+                    border-top: 2px solid #9b9b9b;
+                    border-image-source: linear-gradient(to right, #000, #9b9b9b 10%, #9b9b9b 88%, #000);
+                    border-image-slice: 1;
+                }
+
+                 > div
+                {
+                    flex: 1;
+
+                     > div
                     {
-                        padding: 6.5px;
-                    }
+                        width: 10px;
+                        height: 10px;
+                        margin: 0 auto;
 
-                     > i.center
-                    {
-                        width: 27px;
-                        border: 1px solid #f5a623;
                         border-radius: 50%;
+                        background-color: #9b9b9b;
+
+                        &.center
+                        {
+                            z-index: 1;
+
+                            width: 30px;
+                            height: 30px;
+
+                            background-color: #f5a623;
+
+                            &:before
+                            {
+                                position: relative;
+                                z-index: 2;
+                                top: 10px;
+                                left: 10px;
+
+                                display: block;
+
+                                width: 10px;
+                                height: 10px;
+
+                                content: '';
+
+                                border-radius: 50%;
+                                background-color: #f5a623;
+                            }
+
+                            &:after
+                            {
+                                position: relative;
+                                z-index: 1;
+                                bottom: 9px;
+                                left: 1px;
+
+                                display: block;
+
+                                width: 28px;
+                                height: 28px;
+
+                                content: '';
+
+                                border-radius: 50%;
+                                background-color: #000;
+                            }
+                        }
                     }
                 }
             }

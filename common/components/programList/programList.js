@@ -111,7 +111,7 @@ class ProgramList extends React.Component
     render()
     {
         const { tabs } = this.state;
-        const firstDay = Number(this.props.data.week[0].slice(3, 4));
+        const firstDay = Number(this.props.data.week[0].split('/')[1]);
         const year = new Date().getFullYear();
         const month = new Date().getMonth() + 1;
 
@@ -121,13 +121,13 @@ class ProgramList extends React.Component
                     <div>{`${year}年${month}月`}</div>
                 </div>
                 <div className="tabs">
-                    <div className={tabs.Mon} onClick={() => this.selectProgrmaList('Mon')}>{firstDay}<span>一</span></div>
-                    <div className={tabs.Tue} onClick={() => this.selectProgrmaList('Tue')}>{firstDay + 1}<span>二</span></div>
-                    <div className={tabs.Wed} onClick={() => this.selectProgrmaList('Wed')}>{firstDay + 2}<span>三</span></div>
-                    <div className={tabs.Thu} onClick={() => this.selectProgrmaList('Thu')}>{firstDay + 3}<span>四</span></div>
-                    <div className={tabs.Fri} onClick={() => this.selectProgrmaList('Fri')}>{firstDay + 4}<span>五</span></div>
-                    <div className={tabs.Sat} onClick={() => this.selectProgrmaList('Sat')}>{firstDay + 5}<span>六</span></div>
-                    <div className={tabs.Sun} onClick={() => this.selectProgrmaList('Sun')}>{firstDay + 6}<span>日</span></div>
+                    <div className={tabs.Mon} onClick={() => this.selectProgrmaList('Mon')}><div>{firstDay}<span>一</span></div></div>
+                    <div className={tabs.Tue} onClick={() => this.selectProgrmaList('Tue')}><div>{firstDay + 1}<span>二</span></div></div>
+                    <div className={tabs.Wed} onClick={() => this.selectProgrmaList('Wed')}><div>{firstDay + 2}<span>三</span></div></div>
+                    <div className={tabs.Thu} onClick={() => this.selectProgrmaList('Thu')}><div>{firstDay + 3}<span>四</span></div></div>
+                    <div className={tabs.Fri} onClick={() => this.selectProgrmaList('Fri')}><div>{firstDay + 4}<span>五</span></div></div>
+                    <div className={tabs.Sat} onClick={() => this.selectProgrmaList('Sat')}><div>{firstDay + 5}<span>六</span></div></div>
+                    <div className={tabs.Sun} onClick={() => this.selectProgrmaList('Sun')}><div>{firstDay + 6}<span>日</span></div></div>
                 </div>
                 {this.renderProgramLsit()}
             </div>

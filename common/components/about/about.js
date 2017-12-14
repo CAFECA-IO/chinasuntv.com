@@ -1,7 +1,6 @@
 import React from 'react';
 import { translate } from 'react-i18next';
 import isNode from 'detect-node';
-import PropTypes from 'prop-types';
 
 if (!isNode)
 {
@@ -23,14 +22,13 @@ class About extends React.Component
         return (
             <section>
                 <div>
-                    <div className="rect_yellow" />
                     <div className="title">關於我們</div>
                 </div>
 
                 <div className="part">
                     <div className="rectangle">
                         <div className="rect" />
-                        <div className="title">衛視簡介</div>
+                        <div className="subTitle">衛視簡介</div>
 
                         <div className="content">陽光衛視是全球唯一一家華語獨立言論及紀錄片電視頻道。<br />
                           陽光衛視2000年創辦于中國香港，為24小時全天候中文衛星頻道，以香港、北京、台北為節目核心製作基地，以製作歷史、人文、財經、時政節目和記錄片為主要內容，為公民話語、學者思想提供開放空間和獨立平臺。<br />
@@ -41,7 +39,7 @@ class About extends React.Component
 
                     <div className="rectangle">
                         <div className="rect" />
-                        <div className="title">精品欄目</div>
+                        <div className="subTitle">精品欄目</div>
 
                         <div className="content">深度言論欄目<br />
                           《子夜》、《論衡》、《陽光書坊》、《說文解字》、《春秋》<br />
@@ -54,7 +52,7 @@ class About extends React.Component
                 <div className="part">
                     <div className="rectangle">
                         <div className="rect" />
-                        <div className="title">精品推薦</div>
+                        <div className="subTitle">精品推薦</div>
 
                         <div className="content">《論衡》<br />
                           阳光衛視強檔對話欄目《論衡》由陽光衛視董事長、特約評論員陳平先生擔綱主持，與國內外一流學者嘉賓對陣。坐而論道，衡之於左右。《論衡》，解釋世俗之疑，辨照是非之理，尊崇獨立思考，和而不同，堅持中立立場，相容天下言論。《論衡》自開播伊始，在海內外傳播日廣，其中諸多專題在華人社會被持續關注廣泛討論。
@@ -73,9 +71,5 @@ class About extends React.Component
         );
     }
 }
-
-About.propTypes = {
-    cookies: PropTypes.object.isRequired
-};
 
 export default About;
