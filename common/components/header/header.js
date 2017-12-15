@@ -23,6 +23,7 @@ class Header extends React.Component
             }
         };
         this.toggleMenu = this.toggleMenu.bind(this);
+        this.scroll = this.scroll.bind(this);
     }
 
     componentDidMount()
@@ -50,23 +51,19 @@ class Header extends React.Component
 
     headerOriginal()
     {
-        const classObj = {
-            header: ''
-        };
-
         this.setState(update(this.state, {
-            classes: { $set: classObj }
+            classes: {
+                header: { $set: '' }
+            }
         }));
     }
 
     headerFolded()
     {
-        const classObj = {
-            header: 'folded'
-        };
-
         this.setState(update(this.state, {
-            classes: { $set: classObj }
+            classes: {
+                header: { $set: 'folded' }
+            }
         }));
     }
 
@@ -82,19 +79,26 @@ class Header extends React.Component
         }));
     }
 
+    scroll(section)
+    {
+        const scrollTo = document.querySelector(section);
+        scrollTo.scrollIntoView({ behavior: 'smooth' });
+    }
+
     render()
     {
         const { header } = this.state.classes;
         return (
             <header className={header}>
                 <a href="/" className="logo">
-                    <img src="/asset/img/xplay.svg" alt="tideiSun" />
+                    <img src="/asset/img/logo-suntv.svg" alt="tideiSun" />
+                    <img src="/asset/img/logo-type.svg" alt="tideiSun" />
                 </a>
                 <div className="slideNav">
                     <nav>
-                        <span>直播節目</span>
-                        <span>關於我們</span>
-                        <span>聯繫我們</span>
+                        <span onClick={() => this.scroll('.c_programList')}>直播節目</span>
+                        <span onClick={() => this.scroll('.c_about')}>關於我們</span>
+                        <span onClick={() => this.scroll('.c_contact')}>聯繫我們</span>
                     </nav>
                     {/* <div className="contact">
                         <div className="language">

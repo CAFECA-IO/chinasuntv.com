@@ -14,16 +14,17 @@ class ProgramList extends React.Component
 {
     constructor(props)
     {
+        const day = new Date().getDay();
         super(props);
         this.state = {
             tabs: {
-                Mon: new Date().getDay() === 1 ? 'active' : '',
-                Tue: new Date().getDay() === 2 ? 'active' : '',
-                Wed: new Date().getDay() === 3 ? 'active' : '',
-                Thu: new Date().getDay() === 4 ? 'active' : '',
-                Fri: new Date().getDay() === 5 ? 'active' : '',
-                Sat: new Date().getDay() === 6 ? 'active' : '',
-                Sun: new Date().getDay() === 0 ? 'active' : ''
+                Mon: day === 1 ? 'active' : '',
+                Tue: day === 2 ? 'active' : '',
+                Wed: day === 3 ? 'active' : '',
+                Thu: day === 4 ? 'active' : '',
+                Fri: day === 5 ? 'active' : '',
+                Sat: day === 6 ? 'active' : '',
+                Sun: day === 0 ? 'active' : ''
             }
         };
 

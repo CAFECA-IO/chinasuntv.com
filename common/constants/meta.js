@@ -1,5 +1,5 @@
 export let meta = {
-    title: 'XPLAY Tech',
+    title: 'ChinaSuntv',
     canonical: '',
     meta: {
         charset: 'utf-8',

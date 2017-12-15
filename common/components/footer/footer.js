@@ -27,7 +27,7 @@ class Footer extends React.Component
             <footer>
                 <div>
                     <div>
-                        <div>TIDEiSUN</div>
+                        <div><img src="/asset/img/logotype-tideisun.svg" alt="tideiSun" /></div>
                         <div>Copyright © 2017 TideiSun Group 泰德陽光集團. All rights reserved.</div>
                     </div>
                 </div>

@@ -26,6 +26,14 @@ header
         transition: width $transitionTime $transitionTime $timeFunc;
 
         background-color: #262626;
+
+        > img
+        {
+            &:last-child
+            {
+                margin-left: 15px;
+            }
+        }
     }
 
     div.slideNav
@@ -177,7 +185,7 @@ header
 
         a.logo
         {
-            width: 60px;
+            width: 170px;
         }
 
         div.slideNav
@@ -229,6 +237,12 @@ header
     &.color
     {
         height: 80px;
+
+        @media (max-width: 480px)
+        {
+            z-index: 999;
+            height: 100%;
+        }
 
         div.slideNav
         {
@@ -289,13 +303,13 @@ header
         }
     }
 
-    @media (max-width: 768px)
+    @media (max-width: 480px)
     {
         height: 60px;
 
         a.logo
         {
-            width: 120px;
+            width: 160px;
         }
 
         div.slideNav
@@ -312,7 +326,7 @@ header
             background-color: transparent;
              > span
             {
-                background-color: #fff;
+                background-color: #ffb742;
             }
         }
     }
