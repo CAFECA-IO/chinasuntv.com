@@ -41,9 +41,45 @@ class Index extends React.Component
         this.meta = metaObj;
     }
 
+    getPreNowNext()
+    {
+        const week = this.props.chinaSuntv.info.week[new Date().getDay() - 1];
+        const weeInfo = this.props.chinaSuntv.info.weekInfo[week];
+        let programPlayed = [];
+        let preNowNext = {
+            pre: [],
+            now: [],
+            next: []
+        };
+
+        for (let item of weeInfo)
+        {
+            const content = (
+                <div key={item.PlayTime}>
+                    <div>{item.PlayTime.split(' ')[1]}</div>
+                    <div><div>{item.prgColumn}</div></div>
+                    <div>{item.prgName}</div>
+                </div>
+            );
+
+            if (new Date() / 1 > new Date(item.PlayTime) / 1)
+            {
+                programPlayed.push(content);
+            }
+        }
+
+        const prePlayed = programPlayed.length - 2;
+
+        Object.keys(preNowNext).map((item, index) => {
+            const play = prePlayed + index;
+            return preNowNext[item].push(weeInfo[play].PlayTime.split(' ')[1], weeInfo[play].prgColumn, weeInfo[play].prgName);
+        });
+
+        return preNowNext;
+    }
+
     render()
     {
-        // const { t } = this.props;
         return (
             <div className="co_index">
 
@@ -53,7 +89,7 @@ class Index extends React.Component
                 <Header />
 
                 <div className="content">
-                    <ChinaSuntv data={this.props.chinaSuntv.info} />
+                    <ChinaSuntv data={this.props.chinaSuntv.info} methods={{ getPreNowNext: ::this.getPreNowNext }} />
 
                     <ProgramList data={this.props.chinaSuntv.info} />
 

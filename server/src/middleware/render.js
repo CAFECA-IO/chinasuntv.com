@@ -40,7 +40,7 @@ function videoJsScript(urlNoquery)
     if (urlNoquery === '/' || urlNoquery.indexOf('/search') !== -1 || urlNoquery.indexOf('/video') !== -1)
     {
         script = `<script src='/asset/js/videojs/videojs.min.js'></script>
-              <script defer src='/asset/js/videojs/videojs-contrib-hls.min.js'></script>`;
+              <script src='/asset/js/videojs/videojs-contrib-hls.min.js'></script>`;
     }
 
     return script;
@@ -103,6 +103,7 @@ export default function render(app)
                                             <meta name="viewport" content="width=device-width, initial-scale=1">
                                             <meta name="description" content="">
                                             <link rel="shortcut icon" href="/asset/img/favicon.ico" type="image/x-icon" />
+                                            <link rel="stylesheet" href='/asset/css/videojs/videojs.min.css' />
                                             ${videoJsScript(urlNoquery)}
                                             ${bundleCss}
                                         </head>`, 'utf8');

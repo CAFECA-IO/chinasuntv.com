@@ -31,6 +31,15 @@ class ProgramList extends React.Component
         this.selectProgrmaList = this.selectProgrmaList.bind(this);
     }
 
+    componentDidMount()
+    {
+        const element = document.querySelector('.programContainer');
+        element.childNodes[this.nowPlaying].classList.add('scroll');
+
+        const scroll = document.querySelector('.scroll');
+        scroll.parentNode.scrollTop = scroll.offsetTop - scroll.parentNode.offsetTop;
+    }
+
     selectProgrmaList(week)
     {
         this.day = week;
@@ -89,20 +98,33 @@ class ProgramList extends React.Component
                 break;
             default:
         }
-        const content = arr.map((item) => {
-            return (
+
+        let programList = [];
+        let programPlayed = [];
+        for (let item of arr)
+        {
+            const content = (
                 <div key={item.PlayTime}>
                     <div>{item.PlayTime.split(' ')[1]}</div>
                     <div><div>{item.prgColumn}</div></div>
                     <div>{item.prgName}</div>
                 </div>
             );
-        });
+
+            if (new Date() / 1 > new Date(item.PlayTime) / 1)
+            {
+                programPlayed.push(content);
+            }
+
+            programList.push(content);
+        }
+
+        this.nowPlaying = programPlayed.length - 1;
 
         return (
             <div className="programList">
                 <div className="programContainer">
-                    {content}
+                    {programList}
                 </div>
             </div>
         );
@@ -121,13 +143,15 @@ class ProgramList extends React.Component
                     <div>{`${year}年${month}月`}</div>
                 </div>
                 <div className="tabs">
-                    <div className={tabs.Mon} onClick={() => this.selectProgrmaList('Mon')}><div>{firstDay}<span>一</span></div></div>
-                    <div className={tabs.Tue} onClick={() => this.selectProgrmaList('Tue')}><div>{firstDay + 1}<span>二</span></div></div>
-                    <div className={tabs.Wed} onClick={() => this.selectProgrmaList('Wed')}><div>{firstDay + 2}<span>三</span></div></div>
-                    <div className={tabs.Thu} onClick={() => this.selectProgrmaList('Thu')}><div>{firstDay + 3}<span>四</span></div></div>
-                    <div className={tabs.Fri} onClick={() => this.selectProgrmaList('Fri')}><div>{firstDay + 4}<span>五</span></div></div>
-                    <div className={tabs.Sat} onClick={() => this.selectProgrmaList('Sat')}><div>{firstDay + 5}<span>六</span></div></div>
-                    <div className={tabs.Sun} onClick={() => this.selectProgrmaList('Sun')}><div>{firstDay + 6}<span>日</span></div></div>
+                    <div>
+                        <div className={tabs.Mon} onClick={() => this.selectProgrmaList('Mon')}><div>{firstDay}<span>一</span></div></div>
+                        <div className={tabs.Tue} onClick={() => this.selectProgrmaList('Tue')}><div>{firstDay + 1}<span>二</span></div></div>
+                        <div className={tabs.Wed} onClick={() => this.selectProgrmaList('Wed')}><div>{firstDay + 2}<span>三</span></div></div>
+                        <div className={tabs.Thu} onClick={() => this.selectProgrmaList('Thu')}><div>{firstDay + 3}<span>四</span></div></div>
+                        <div className={tabs.Fri} onClick={() => this.selectProgrmaList('Fri')}><div>{firstDay + 4}<span>五</span></div></div>
+                        <div className={tabs.Sat} onClick={() => this.selectProgrmaList('Sat')}><div>{firstDay + 5}<span>六</span></div></div>
+                        <div className={tabs.Sun} onClick={() => this.selectProgrmaList('Sun')}><div>{firstDay + 6}<span>日</span></div></div>
+                    </div>
                 </div>
                 {this.renderProgramLsit()}
             </div>

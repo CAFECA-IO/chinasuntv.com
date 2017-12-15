@@ -17,21 +17,40 @@ class ChinaSuntv extends React.Component
         this.state = {};
     }
 
+    componentDidMount()
+    {
+        this.videoPlayer = videojs(this.player);
+        this.videoPlayer.src({ type: 'application/x-mpegURL', src: 'https://stream.isuntv.com/680k/mid_video_index.m3u8' });
+        this.videoPlayer.play();
+    }
+
     render()
     {
-        // console.log(document.getElementsByClassName('scroll'));
+        const { pre, now, next } = this.props.methods.getPreNowNext();
+
         return (
             <div className="c_chinaSuntv">
-                <video autoPlay src="https://stream.isuntv.com/680k/mid_video_index.m3u8" />
+                <div className="video">
+                    <video
+                        preload="true"
+                        ref={(video) => { this.player = video; }}
+                        className="video-js vjs-big-play-centered"
+                        controls
+                        onContextMenu={(e) => { e.preventDefault(); }}
+                    />
+                    <div className="paddingBottom" />
+                </div>
+
                 <div className="nowPlaying">
                     <div>Now Playing</div>
-                    <div>世紀天才</div>
+                    <div>{now[2]}</div>
                 </div>
+
                 <div className="preNext">
                     <div>
-                        <span>00:00</span>
-                        <span>01:00</span>
-                        <span>02:00</span>
+                        <span>{pre[0]}</span>
+                        <span>{now[0]}</span>
+                        <span>{next[0]}</span>
                     </div>
                     <div>
                         <div><div /></div>
@@ -39,14 +58,14 @@ class ChinaSuntv extends React.Component
                         <div><div /></div>
                     </div>
                     <div className="programTag">
-                        <div><span>紀錄片</span></div>
-                        <div className="center"><span>人物傳記</span></div>
-                        <div><span>歷史人文</span></div>
+                        <div><span>{pre[1]}</span></div>
+                        <div className="center"><span>{now[1]}</span></div>
+                        <div><span>{next[1]}</span></div>
                     </div>
                     <div className="programName">
-                        <span>輝煌中原</span>
-                        <span className="center">世紀天才</span>
-                        <span>文明的傳承</span>
+                        <span>{pre[2]}</span>
+                        <span className="center">{now[2]}</span>
+                        <span>{next[2]}</span>
                     </div>
                 </div>
             </div>
@@ -55,7 +74,7 @@ class ChinaSuntv extends React.Component
 }
 
 ChinaSuntv.propTypes = {
-    data: PropTypes.object.isRequired
+    methods: PropTypes.object.isRequired
 };
 
 export default ChinaSuntv;
