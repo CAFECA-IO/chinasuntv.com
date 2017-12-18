@@ -3,6 +3,7 @@ import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 import isNode from 'detect-node';
 import update from 'immutability-helper';
+import moment from 'moment';
 
 if (!isNode)
 {
@@ -60,6 +61,61 @@ class ProgramList extends React.Component
         this.setState(update(this.state, {
             tabs: { $set: obj }
         }));
+    }
+
+    renderTabs()
+    {
+        const { tabs } = this.state;
+        const { week } = this.props.data;
+        let weekTabs = [];
+
+        for (let key in week)
+        {
+            // 用 api 傳回的年份月份日期陣列，取得日期
+            // 用 moment 以日期取得星期幾
+            const date = week[key].split('/')[1];
+            const weekDate = moment(new Date(week[key])).format('dddd').slice(0, 3);
+            let day;
+
+            switch (weekDate)
+            {
+                case 'Mon':
+                    day = '一';
+                    break;
+                case 'Tue':
+                    day = '二';
+                    break;
+                case 'Wed':
+                    day = '三';
+                    break;
+                case 'Thu':
+                    day = '四';
+                    break;
+                case 'Fri':
+                    day = '五';
+                    break;
+                case 'Sat':
+                    day = '六';
+                    break;
+                case 'Sun':
+                    day = '日';
+                    break;
+                default:
+            }
+            const content = (
+                <div key={key} className={tabs[weekDate]} onClick={() => this.selectProgrmaList(weekDate)}>
+                    <div>{date}<span>{day}</span></div>
+                </div>
+            );
+
+            weekTabs.push(content);
+        }
+
+        return (
+            <div>
+                {weekTabs}
+            </div>
+        );
     }
 
     renderProgramLsit()
@@ -133,8 +189,6 @@ class ProgramList extends React.Component
 
     render()
     {
-        const { tabs } = this.state;
-        const firstDay = Number(this.props.data.week[0].split('/')[1]);
         const year = new Date().getFullYear();
         const month = new Date().getMonth() + 1;
 
@@ -144,15 +198,7 @@ class ProgramList extends React.Component
                     <div>{`${year}年${month}月`}</div>
                 </div>
                 <div className="tabs">
-                    <div>
-                        <div className={tabs.Mon} onClick={() => this.selectProgrmaList('Mon')}><div>{firstDay}<span>一</span></div></div>
-                        <div className={tabs.Tue} onClick={() => this.selectProgrmaList('Tue')}><div>{firstDay + 1}<span>二</span></div></div>
-                        <div className={tabs.Wed} onClick={() => this.selectProgrmaList('Wed')}><div>{firstDay + 2}<span>三</span></div></div>
-                        <div className={tabs.Thu} onClick={() => this.selectProgrmaList('Thu')}><div>{firstDay + 3}<span>四</span></div></div>
-                        <div className={tabs.Fri} onClick={() => this.selectProgrmaList('Fri')}><div>{firstDay + 4}<span>五</span></div></div>
-                        <div className={tabs.Sat} onClick={() => this.selectProgrmaList('Sat')}><div>{firstDay + 5}<span>六</span></div></div>
-                        <div className={tabs.Sun} onClick={() => this.selectProgrmaList('Sun')}><div>{firstDay + 6}<span>日</span></div></div>
-                    </div>
+                    {this.renderTabs()}
                 </div>
                 {this.renderProgramLsit()}
             </div>

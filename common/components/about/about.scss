@@ -72,6 +72,11 @@
 
                     text-align: center;
                     text-align: justify;
+
+                    > img
+                    {
+                        width: 100%;
+                    }
                 }
 
                 > div.rect

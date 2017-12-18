@@ -1,4 +1,4 @@
-$transitionTime: .3s;
+$transitionTime: .2s;
 $timeFunc: cubic-bezier(.77, 0, .175, 1);
 
 header
@@ -13,6 +13,7 @@ header
     height: 70px;
 
     transition: height $transitionTime $timeFunc;
+
     background-color: #262626;
 
     a.logo
@@ -27,7 +28,7 @@ header
 
         background-color: #262626;
 
-        > img
+         > img
         {
             &:last-child
             {
@@ -55,12 +56,15 @@ header
 
              > span
             {
-                cursor: pointer;
-                text-align: center;
-                margin-right: 30px;
-                color: #fff;
                 font-size: 14px;
                 font-weight: 300;
+
+                margin-right: 30px;
+
+                cursor: pointer;
+                text-align: center;
+
+                color: #fff;
             }
         }
 
@@ -180,12 +184,20 @@ header
 
     &.folded
     {
-        height: 80px;
+        height: 60px;
+
         background-color: transparent;
+
+        @media (max-width: 480px)
+        {
+            z-index: 2;
+
+            background-color: #262626;
+        }
 
         a.logo
         {
-            width: 170px;
+            width: 150px;
         }
 
         div.slideNav
@@ -240,8 +252,17 @@ header
 
         @media (max-width: 480px)
         {
-            z-index: 999;
+            z-index: 99;
+
             height: 100%;
+        }
+
+        > a.logo
+        {
+            @media (max-width: 480px)
+            {
+                display: none;
+            }
         }
 
         div.slideNav
@@ -249,8 +270,8 @@ header
             transform: translateX(0%);
 
             opacity: 1;
-            background-color: #262626;
             color: #fff;
+            background-color: #262626;
 
             .language
             {
@@ -261,6 +282,11 @@ header
         div.hamburger
         {
             transform: translateY(100%);
+
+            @media (max-width: 480px)
+            {
+                top: -147%;
+            }
 
              > span
             {
@@ -292,7 +318,7 @@ header
     {
         a.logo
         {
-            width: 60px;
+            // width: 60px;
         }
         div.slideNav
         {

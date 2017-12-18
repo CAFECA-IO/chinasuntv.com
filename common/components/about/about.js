@@ -62,8 +62,7 @@ class About extends React.Component
 
                         <div className="rectangle">
                             <div className="content">
-                              img
-                              {/* <img></img> */}
+                                <img alt="" src="/asset/img/boss@2x.png" />
                             </div>
                         </div>
                     </div>

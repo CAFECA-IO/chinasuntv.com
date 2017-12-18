@@ -43,39 +43,42 @@ class Index extends React.Component
 
     getPreNowNext()
     {
-        const week = this.props.chinaSuntv.info.week[new Date().getDay() - 1];
-        const weeInfo = this.props.chinaSuntv.info.weekInfo[week];
-        let programPlayed = [];
-        let preNowNext = {
-            pre: [],
-            now: [],
-            next: []
-        };
-
-        for (let item of weeInfo)
+        if (undefined !== this.props.chinaSuntv.info)
         {
-            const content = (
-                <div key={item.PlayTime}>
-                    <div>{item.PlayTime.split(' ')[1]}</div>
-                    <div><div>{item.prgColumn}</div></div>
-                    <div>{item.prgName}</div>
-                </div>
-            );
+            const week = this.props.chinaSuntv.info.week[new Date().getDay() - 1];
+            const weeInfo = this.props.chinaSuntv.info.weekInfo[week];
+            let programPlayed = [];
+            let preNowNext = {
+                pre: [],
+                now: [],
+                next: []
+            };
 
-            if (new Date() / 1 > new Date(item.PlayTime) / 1)
+            for (let item of weeInfo)
             {
-                programPlayed.push(content);
+                const content = (
+                    <div key={item.PlayTime}>
+                        <div>{item.PlayTime.split(' ')[1]}</div>
+                        <div><div>{item.prgColumn}</div></div>
+                        <div>{item.prgName}</div>
+                    </div>
+                );
+
+                if (new Date() / 1 > new Date(item.PlayTime) / 1)
+                {
+                    programPlayed.push(content);
+                }
             }
+
+            const prePlayed = programPlayed.length - 2;
+
+            Object.keys(preNowNext).map((item, index) => {
+                const play = prePlayed + index;
+                return preNowNext[item].push(weeInfo[play].PlayTime.split(' ')[1], weeInfo[play].prgColumn, weeInfo[play].prgName);
+            });
+
+            return preNowNext;
         }
-
-        const prePlayed = programPlayed.length - 2;
-
-        Object.keys(preNowNext).map((item, index) => {
-            const play = prePlayed + index;
-            return preNowNext[item].push(weeInfo[play].PlayTime.split(' ')[1], weeInfo[play].prgColumn, weeInfo[play].prgName);
-        });
-
-        return preNowNext;
     }
 
     render()
