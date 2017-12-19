@@ -49,6 +49,14 @@
 
                 border-bottom: 1.5px solid #4a4a4a;
 
+                @media (max-width: 480px)
+                {
+                    &.hidden
+                    {
+                        display: none;
+                    }
+                }
+
                 &:hover
                 {
                     cursor: pointer;

@@ -68,6 +68,33 @@ class ProgramList extends React.Component
         const { tabs } = this.state;
         const { week } = this.props.data;
         let weekTabs = [];
+        let today;
+        let yesterday;
+        let tomorrow;
+
+        switch (moment().format('dddd').slice(0, 3))
+        {
+            case 'Mon':
+                yesterday = -1;
+                today = 0;
+                tomorrow = 1;
+                break;
+            case 'Tue':
+            case 'Wed':
+            case 'Thu':
+            case 'Fri':
+            case 'Sat':
+                yesterday = 0;
+                today = 1;
+                tomorrow = 2;
+                break;
+            case 'Sun':
+                yesterday = 1;
+                today = 2;
+                tomorrow = 3;
+                break;
+            default:
+        }
 
         for (let key in week)
         {
@@ -75,6 +102,7 @@ class ProgramList extends React.Component
             // 用 moment 以日期取得星期幾
             const date = week[key].split('/')[1];
             const weekDate = moment(new Date(week[key])).format('dddd').slice(0, 3);
+            const todayDay = new Date().getDay();
             let day;
 
             switch (weekDate)
@@ -102,8 +130,9 @@ class ProgramList extends React.Component
                     break;
                 default:
             }
+
             const content = (
-                <div key={key} className={tabs[weekDate]} onClick={() => this.selectProgrmaList(weekDate)}>
+                <div key={week[key]} className={`${tabs[weekDate]}${todayDay === Number(key) + today || todayDay === Number(key) + yesterday || todayDay === Number(key) + tomorrow ? '' : ' hidden'}`} onClick={() => this.selectProgrmaList(weekDate)}>
                     <div>{date}<span>{day}</span></div>
                 </div>
             );

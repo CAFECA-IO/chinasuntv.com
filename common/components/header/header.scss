@@ -1,4 +1,4 @@
-$transitionTime: .2s;
+$transitionTime: .25s;
 $timeFunc: cubic-bezier(.77, 0, .175, 1);
 
 header
@@ -54,7 +54,7 @@ header
             flex: 7;
             justify-content: flex-end;
 
-             > span
+             > div
             {
                 font-size: 14px;
                 font-weight: 300;
@@ -169,6 +169,7 @@ header
          > div
         {
             padding: 15px;
+
              > span
             {
                 margin-right: 15px;
@@ -257,7 +258,7 @@ header
             height: 100%;
         }
 
-        > a.logo
+         > a.logo
         {
             @media (max-width: 480px)
             {
@@ -273,9 +274,49 @@ header
             color: #fff;
             background-color: #262626;
 
-            .language
+             > nav
             {
-                opacity: 0;
+                @media (max-width: 480px)
+                {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                 > div
+                {
+                    @media (max-width: 480px)
+                    {
+                        font-size: 20px;
+
+                        visibility: visible;
+                        flex: 0.7;
+
+                        margin: 0 auto;
+                        padding-left: 60px;
+                    }
+
+                    &:hover
+                    {
+                        // color: #ffb742;
+                        // transition: color $transitionTime;
+                    }
+
+                    &:first-child
+                    {
+                        @media (max-width: 480px)
+                        {
+                            margin-top: 100px;
+                        }
+                    }
+
+                    &:last-child
+                    {
+                        @media (max-width: 480px)
+                        {
+                            flex: 4;
+                        }
+                    }
+                }
             }
         }
 
@@ -285,7 +326,7 @@ header
 
             @media (max-width: 480px)
             {
-                top: -147%;
+                top: -146%;
             }
 
              > span
@@ -350,6 +391,7 @@ header
             transform: translateY(100%);
 
             background-color: transparent;
+
              > span
             {
                 background-color: #ffb742;

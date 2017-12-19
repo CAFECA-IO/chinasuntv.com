@@ -83,6 +83,12 @@ class Header extends React.Component
     {
         const scrollTo = document.querySelector(section);
         scrollTo.scrollIntoView({ behavior: 'smooth' });
+
+        this.setState(update(this.state, {
+            classes: {
+                header: { $set: 'folded' }
+            }
+        }));
     }
 
     render()
@@ -96,9 +102,9 @@ class Header extends React.Component
                 </a>
                 <div className="slideNav">
                     <nav>
-                        <span onClick={() => this.scroll('.c_programList')}>直播節目</span>
-                        <span onClick={() => this.scroll('.c_about')}>關於我們</span>
-                        <span onClick={() => this.scroll('.c_contact')}>聯繫我們</span>
+                        <div onClick={() => this.scroll('.c_programList')}>直播節目</div>
+                        <div onClick={() => this.scroll('.c_about')}>關於我們</div>
+                        <div onClick={() => this.scroll('.c_contact')}>聯繫我們</div>
                     </nav>
                     {/* <div className="contact">
                         <div className="language">
