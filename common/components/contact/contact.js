@@ -9,7 +9,7 @@ if (!isNode)
     require('./contact.scss');
 }
 
-@translate(['common'], { wait: false })
+@translate([], { wait: isNode ? false : true })
 class Contact extends React.Component
 {
     constructor(props)

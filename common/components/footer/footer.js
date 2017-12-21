@@ -7,7 +7,7 @@ if (!isNode)
     require('./footer.scss');
 }
 
-@translate(['common'], { wait: false })
+@translate([], { wait: isNode ? false : true })
 class Footer extends React.Component
 {
     constructor(props)

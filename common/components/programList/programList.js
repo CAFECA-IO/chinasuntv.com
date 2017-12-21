@@ -10,7 +10,7 @@ if (!isNode)
     require('./programList.scss');
 }
 
-@translate(['common'], { wait: false })
+@translate([], { wait: isNode ? false : true })
 class ProgramList extends React.Component
 {
     constructor(props)

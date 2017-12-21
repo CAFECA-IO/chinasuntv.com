@@ -10,7 +10,7 @@ if (!isNode)
     require('./chinaSuntv.scss');
 }
 
-@translate(['common'], { wait: false })
+@translate([], { wait: isNode ? false : true })
 class ChinaSuntv extends React.Component
 {
     constructor(props)

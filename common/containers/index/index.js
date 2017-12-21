@@ -55,8 +55,8 @@ class Index extends React.Component
     getPreNowNext()
     {
         const { nowTime } = this.state;
-        const week = this.props.chinaSuntv.info.week[new Date().getDay() - 1];
-        const weeInfo = this.props.chinaSuntv.info.weekInfo[week];
+        let week = this.props.chinaSuntv.info.week[new Date().getDay() - 1];
+        let weekInfo = this.props.chinaSuntv.info.weekInfo[week];
         let programPlayed = [];
         let preNowNext = {
             pre: [],
@@ -64,7 +64,7 @@ class Index extends React.Component
             next: []
         };
 
-        for (let item of weeInfo)
+        for (let item of weekInfo)
         {
             const content = (
                 <div key={item.PlayTime}>
@@ -83,8 +83,22 @@ class Index extends React.Component
         const prePlayed = programPlayed.length - 2;
 
         Object.keys(preNowNext).map((item, index) => {
-            const play = prePlayed + index;
-            return preNowNext[item].push(weeInfo[play].PlayTime.split(' ')[1], weeInfo[play].prgColumn, weeInfo[play].prgName);
+            let play = prePlayed + index;
+
+            // 現在時間是當天最早節目 或 最晚節目，要取昨天的最後一筆節目 或 隔天的第一筆節目
+            if (play === weekInfo.length)
+            {
+                play = 0;
+                week = this.props.chinaSuntv.info.week[new Date().getDay()];
+                weekInfo = this.props.chinaSuntv.info.weekInfo[week];
+            }
+            else if (play === -1)
+            {
+                play = weekInfo.length - 1;
+                week = this.props.chinaSuntv.info.week[new Date().getDay() - 2];
+                weekInfo = this.props.chinaSuntv.info.weekInfo[week];
+            }
+            return preNowNext[item].push(weekInfo[play].PlayTime.split(' ')[1], weekInfo[play].prgColumn, weekInfo[play].prgName);
         });
 
         return preNowNext;
