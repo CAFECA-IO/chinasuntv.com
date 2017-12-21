@@ -7,7 +7,7 @@ export default
         return {
             initExec: false,
             routes: [
-                { method: 'get', url: '/api/sendMail' },
+                { method: 'post', url: '/api/sendMail' },
             ]
         };
     },
@@ -27,28 +27,31 @@ export default
 
         // setup email data with unicode symbols
         const mailOptions = {
-            from: 'erin.chen@isuncloud.com', // sender address
-            to: 'erin.chen@isuncloud.com', // list of receivers
-            subject: req.params.subject, // Subject line
-            text: req.params.text, // plain text body
-            html: req.params.html // html body
+            to: 'chuicl@isuntv.com', // list of receivers
+            subject: '陽光衛視直播網站意見回覆', // Subject line
+            html: req.body.comment // html body
         };
+
+        let message;
+        let resultCode;
 
         // send mail with defined transport object
         transporter.sendMail(mailOptions, (error) => {
             if (error)
             {
-                // console.log(error);
+                message = 'send failed';
+                resultCode = 0;
             }
-            // console.log('Message sent: %s', info.messageId);
-            // Preview only available when sending through an Ethereal account
-            // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+            else
+            {
+                message = 'sent successfully';
+                resultCode = 1;
+            }
 
-            // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
-            // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+            res.json({
+                result: resultCode,
+                message
+            });
         });
-
-
-        res.json({});
     }
 };

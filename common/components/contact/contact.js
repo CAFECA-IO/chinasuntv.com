@@ -2,6 +2,7 @@ import React from 'react';
 import { translate } from 'react-i18next';
 import isNode from 'detect-node';
 import update from 'immutability-helper';
+import * as chinaSuntvAction from '../../actions/chinaSuntv';
 
 if (!isNode)
 {
@@ -15,38 +16,50 @@ class Contact extends React.Component
     {
         super(props);
         this.state = {
-            name: '',
-            phone: '',
-            email: '',
-            comment: ''
+            input: {
+                name: '',
+                phone: '',
+                email: '',
+                comment: ''
+            },
+            message: '送出',
+            messageClass: ''
         };
     }
 
     nameChange(e)
     {
         this.setState(update(this.state, {
-            name: { $set: e.target.value }
+            input: {
+                name: { $set: e.target.value }
+            }
         }));
     }
 
     phoneChange(e)
     {
         this.setState(update(this.state, {
-            phone: { $set: e.target.value }
+            input: {
+                phone: { $set: e.target.value }
+            }
         }));
     }
 
     emailChange(e)
     {
         this.setState(update(this.state, {
-            email: { $set: e.target.value }
+            input: {
+                email: { $set: e.target.value }
+            }
         }));
     }
 
     commentChange(e)
     {
         this.setState(update(this.state, {
-            comment: { $set: e.target.value }
+            input: {
+                comment: { $set: e.target.value }
+            }
         }));
     }
 
@@ -54,22 +67,64 @@ class Contact extends React.Component
     {
         if (this.name.value !== '' && this.phone.value !== '' && this.email.value !== '' && this.comment.value !== '')
         {
-            // const data = {
-            //     name: this.name.value,
-            //     phone: this.phone.value,
-            //     email: this.email.value,
-            //     comment: this.comment.value
-            // };
+            const data = {
+                comment: `<h3>姓名：${this.name.value}</h3>
+                          <h3>手機：${this.phone.value}</h3>
+                          <h3>Email：${this.email.value}</h3>
+                          <h3>意見：${this.comment.value}</h3>`
+            };
 
-            // console.log(data);
-
-            // 送出之後清空各欄位
+            chinaSuntvAction.sendMail(data, (err, res) => {
+                if (err)
+                {
+                    if (res.message === 'send failed')
+                    {
+                        this.setState(update(this.state, {
+                            message: { $set: '送出失敗' },
+                            messageClass: { $set: 'error' }
+                        }), () => {
+                            setTimeout(() => {
+                                this.setState(update(this.state, {
+                                    message: { $set: '送出' },
+                                    messageClass: { $set: '' }
+                                }));
+                            }, 2500);
+                        });
+                    }
+                }
+                else
+                {
+                    this.setState(update(this.state, {
+                        input: {
+                            name: { $set: '' },
+                            phone: { $set: '' },
+                            email: { $set: '' },
+                            comment: { $set: '' }
+                        },
+                        message: { $set: '送出成功' }
+                    }), () => {
+                        setTimeout(() => {
+                            this.setState(update(this.state, {
+                                message: { $set: '送出' },
+                            }));
+                        }, 2500);
+                    });
+                }
+            });
+        }
+        else
+        {
             this.setState(update(this.state, {
-                name: { $set: '' },
-                phone: { $set: '' },
-                email: { $set: '' },
-                comment: { $set: '' }
-            }));
+                message: { $set: '欄位未完成' },
+                messageClass: { $set: 'error' }
+            }), () => {
+                setTimeout(() => {
+                    this.setState(update(this.state, {
+                        message: { $set: '送出' },
+                        messageClass: { $set: '' }
+                    }));
+                }, 2500);
+            });
         }
     }
 
@@ -77,7 +132,9 @@ class Contact extends React.Component
     {
         const {
             name, phone, email, comment
-        } = this.state;
+        } = this.state.input;
+
+        const { message, messageClass } = this.state;
 
         return (
             <div className="c_contact">
@@ -102,7 +159,7 @@ class Contact extends React.Component
                                 <textarea value={comment} onChange={::this.commentChange} ref={(input) => { this.comment = input; }} />
                             </div>
                             <div className="submit">
-                                <button onClick={::this.submit}>送出</button>
+                                <button onClick={::this.submit}><div className={messageClass}>{message}</div></button>
                             </div>
                         </div>
                     </div>
