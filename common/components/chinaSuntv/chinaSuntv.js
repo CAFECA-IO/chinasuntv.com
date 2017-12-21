@@ -1,6 +1,8 @@
 import React from 'react';
 import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
+// import update from 'immutability-helper';
+// import equal from 'deep-equal';
 import isNode from 'detect-node';
 
 if (!isNode)

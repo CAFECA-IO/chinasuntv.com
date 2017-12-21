@@ -150,37 +150,38 @@ class ProgramList extends React.Component
     renderProgramLsit()
     {
         const { week, weekInfo } = this.props.data;
-        let day;
+        let day = {
+            Mon: week[0],
+            Tue: week[1],
+            Wed: week[2],
+            Thu: week[3],
+            Fri: week[4],
+            Sat: week[5],
+            Sun: week[6]
+        };
         let arr;
         switch (this.day)
         {
             case 'Mon':
-                day = week[0];
-                arr = weekInfo[day];
+                arr = weekInfo[day.Mon];
                 break;
             case 'Tue':
-                day = week[1];
-                arr = weekInfo[day];
+                arr = weekInfo[day.Tue];
                 break;
             case 'Wed':
-                day = week[2];
-                arr = weekInfo[day];
+                arr = weekInfo[day.Wed];
                 break;
             case 'Thu':
-                day = week[3];
-                arr = weekInfo[day];
+                arr = weekInfo[day.Thu];
                 break;
             case 'Fri':
-                day = week[4];
-                arr = weekInfo[day];
+                arr = weekInfo[day.Fri];
                 break;
             case 'Sat':
-                day = week[5];
-                arr = weekInfo[day];
+                arr = weekInfo[day.Sat];
                 break;
             case 'Sun':
-                day = week[6];
-                arr = weekInfo[day];
+                arr = weekInfo[day.Sun];
                 break;
             default:
         }

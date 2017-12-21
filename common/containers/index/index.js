@@ -4,13 +4,13 @@ import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 import isNode from 'detect-node';
 import DocumentMeta from 'react-document-meta';
+import update from 'immutability-helper';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import ChinaSuntv from '../../components/chinaSuntv/chinaSuntv';
 import ProgramList from '../../components/programList/programList';
 import Contact from '../../components/contact/contact';
 import About from '../../components/about/about';
-// import Slider from '../../components/slider/slider';
 import { meta as metaObj } from '../../constants/meta';
 
 if (!isNode)
@@ -37,12 +37,24 @@ class Index extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = {};
+        this.state = {
+            nowTime: new Date() / 1
+        };
         this.meta = metaObj;
+    }
+
+    componentDidMount()
+    {
+        setInterval(() => {
+            this.setState(update(this.state, {
+                nowTime: { $set: new Date() / 1 }
+            }));
+        }, 1000);
     }
 
     getPreNowNext()
     {
+        const { nowTime } = this.state;
         const week = this.props.chinaSuntv.info.week[new Date().getDay() - 1];
         const weeInfo = this.props.chinaSuntv.info.weekInfo[week];
         let programPlayed = [];
@@ -62,7 +74,7 @@ class Index extends React.Component
                 </div>
             );
 
-            if (new Date() / 1 > new Date(item.PlayTime) / 1)
+            if (nowTime > new Date(item.PlayTime) / 1)
             {
                 programPlayed.push(content);
             }

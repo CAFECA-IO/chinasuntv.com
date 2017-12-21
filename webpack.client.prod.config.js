@@ -62,8 +62,8 @@ module.exports = {
         }),
         new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.NormalModuleReplacementPlugin(
-          /.\/containerServer/,
-          './containerClient'
+            /.\/containerServer/,
+            './containerClient'
         ),
         new webpack.optimize.UglifyJsPlugin({
             beautify: false,

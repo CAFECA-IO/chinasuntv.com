@@ -130,7 +130,13 @@
                         color: #f5a623;
                         border: 1px solid #f5a623;
                         border-radius: 10px;
+                        outline: none;
                         background-color: transparent;
+
+                        &:hover
+                        {
+                            cursor: pointer;
+                        }
                     }
                 }
             }

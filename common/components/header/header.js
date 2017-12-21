@@ -1,8 +1,6 @@
 import React from 'react';
 import { translate } from 'react-i18next';
 import isNode from 'detect-node';
-import PropTypes from 'prop-types';
-import { withCookies } from 'react-cookie';
 import update from 'immutability-helper';
 import { addEventListener } from '../../utils/event';
 
@@ -28,7 +26,7 @@ class Header extends React.Component
 
     componentDidMount()
     {
-        const body = document.body;
+        const { body } = document;
 
         if (window.innerWidth < 768)
         {
@@ -112,9 +110,6 @@ class Header extends React.Component
                             <span>English</span>
                             <span>中文</span>
                         </div>
-                        <div>
-                            <span className="client">成為商業客戶</span>
-                        </div>
                     </div> */}
                 </div>
                 <div className="hamburger" onClick={this.toggleMenu}>
@@ -122,25 +117,9 @@ class Header extends React.Component
                     <span className="ham2" />
                     <span className="ham3" />
                 </div>
-                {/* <div className="slideNav2">
-                    <div>關於集團</div>
-                    <div>創辦人</div>
-                    <div>產品發表</div>
-                    <div>加入團隊</div>
-                    <div>媒體室</div>
-                    <div>
-                        <span>日本語</span>
-                        <span>English</span>
-                        <span>中文</span>
-                    </div>
-                </div> */}
             </header>
         );
     }
 }
 
-Header.propTypes = {
-    cookies: PropTypes.object.isRequired
-};
-
-export default withCookies(Header);
+export default Header;

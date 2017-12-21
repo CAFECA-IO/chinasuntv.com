@@ -50,7 +50,7 @@ export default function render(app)
 {
     app.use((req, res, next) =>
     {
-        const url = req.url;
+        const { url } = req;
         if (url.indexOf('/api') !== -1 || url.indexOf('/favicon.ico') !== -1 || url.indexOf('/sitemap.xml') !== -1)
         {
             next();

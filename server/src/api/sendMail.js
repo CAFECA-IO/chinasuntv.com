@@ -7,7 +7,7 @@ export default
         return {
             initExec: false,
             routes: [
-                { method: 'post', url: '/api/sendMail' },
+                { method: 'get', url: '/api/sendMail' },
             ]
         };
     },
@@ -17,18 +17,18 @@ export default
         // create reusable transporter object using the default SMTP transport
         const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
-            port: 456,
+            port: 465,
             secure: true, // true for 465, false for other ports
             auth: {
                 user: 'cs@isuntv.com', // generated ethereal user
-                pass: 'gktkrgxfnvbyazta'  // generated ethereal password
+                pass: 'gktkrgxfnvbyazta' // generated ethereal password
             }
         });
 
         // setup email data with unicode symbols
         const mailOptions = {
-            from: req.params.sender, // sender address
-            to: 'cs@isuntv.com', // list of receivers
+            from: 'erin.chen@isuncloud.com', // sender address
+            to: 'erin.chen@isuncloud.com', // list of receivers
             subject: req.params.subject, // Subject line
             text: req.params.text, // plain text body
             html: req.params.html // html body
@@ -38,7 +38,7 @@ export default
         transporter.sendMail(mailOptions, (error) => {
             if (error)
             {
-                 // console.log(error);
+                // console.log(error);
             }
             // console.log('Message sent: %s', info.messageId);
             // Preview only available when sending through an Ethereal account

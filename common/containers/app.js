@@ -40,5 +40,5 @@ Promise.all(splitPoints.map(chunk => containerClient[chunk].loadComponent().then
                 </BrowserRouter>
             </I18nextProvider>
         </Provider>
-    , document.getElementById('root'));
+        , document.getElementById('root'));
 })));
