@@ -1,36 +1,49 @@
 .c_about
 {
-    section
+     > div
     {
-        color: #ffb742;
-        font-family: Lato;
-
-        > div
+        &:first-child
         {
-            &:first-child
-            {
-                padding-bottom: 20px;
-                border-bottom: 1px solid #4a4a4a;
-            }
+            padding-bottom: 20px;
 
-            > div.title
-            {
-                font-size: 20px;
-                font-weight: 300;
-
-                display: inline-block;
-
-                padding-left: 15px;
-
-                text-align: justify;
-
-                border-left: 5px solid #ffb742;
-            }
+            border-bottom: 1px solid #4a4a4a;
         }
 
-        > div.part
+         > div.title
         {
-            display: inline-flex;
+            font-family: Lato;
+            font-size: 20px;
+            font-weight: 300;
+
+            display: inline-block;
+
+            padding-left: 15px;
+
+            text-align: justify;
+
+            color: #ffb742;
+            border-left: 5px solid #ffb742;
+        }
+    }
+
+    section
+    {
+        font-family: Lato;
+
+        display: flex;
+
+        color: #ffb742;
+
+        @media (max-width: 480px)
+        {
+            flex-direction: column;
+        }
+
+         > div.part
+        {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
 
             color: #fff;
 
@@ -39,9 +52,10 @@
                 flex-direction: column;
             }
 
-            > div.rectangle
+             > div.rectangle
             {
                 flex: 1;
+
                 padding: 4%;
 
                 @media (max-width: 480px)
@@ -50,7 +64,7 @@
                     padding: 6%;
                 }
 
-                > div.subTitle
+                 > div.subTitle
                 {
                     font-size: 18px;
                     font-weight: 500;
@@ -62,7 +76,7 @@
                     text-align: justify;
                 }
 
-                > div.content
+                 > div.content
                 {
                     font-size: 16px;
                     font-weight: 300;
@@ -73,13 +87,13 @@
                     text-align: center;
                     text-align: justify;
 
-                    > img
+                     > img
                     {
                         width: 100%;
                     }
                 }
 
-                > div.rect
+                 > div.rect
                 {
                     position: relative;
                     top: -4px;
@@ -94,5 +108,4 @@
             }
         }
     }
-
 }

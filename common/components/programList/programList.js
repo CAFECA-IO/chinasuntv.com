@@ -33,10 +33,21 @@ class ProgramList extends React.Component
         this.selectProgrmaList = this.selectProgrmaList.bind(this);
     }
 
-    componentWillUpdate()
+    componentDidMount()
     {
         const scroll = document.querySelector('.scroll');
         scroll.parentNode.scrollTop = scroll.offsetTop - scroll.parentNode.offsetTop;
+    }
+
+    componentDidUpdate()
+    {
+        const { now } = this.props.methods.getPreNowNext();
+        const scroll = document.querySelector('.scroll');
+
+        if (moment().format('HH:mm:ss') === `${now[0]}:00`)
+        {
+            scroll.parentNode.scrollTop = scroll.offsetTop - scroll.parentNode.offsetTop;
+        }
     }
 
     selectProgrmaList(week)
@@ -203,7 +214,6 @@ class ProgramList extends React.Component
 
             programList.push(content);
         }
-        // console.log(programPlayed[programPlayed.length - 1].props.className);
         this.nowPlaying = programPlayed.length - 1;
 
         return (
