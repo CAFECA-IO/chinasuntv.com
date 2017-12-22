@@ -20,14 +20,13 @@ export default function (app)
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(cookiesMiddleware());
-    app.use(session(
-        {
-            secret: 'sessionSecret',
-            resave: false,
-            saveUninitialized: true,
-            httpOnly: true,
-            secure: false,
-        }));
+    app.use(session({
+        secret: 'sessionSecret',
+        resave: false,
+        saveUninitialized: true,
+        httpOnly: true,
+        secure: false,
+    }));
     app.use((req, res, next) =>
     {
         res.header('Access-Control-Allow-Origin', '*');
@@ -79,10 +78,9 @@ export default function (app)
         /* eslint import/no-extraneous-dependencies: ["error", {"peerDependencies": true}] */
         const webpackDevMiddleware = require('webpack-dev-middleware');
         const webpackHotMiddleware = require('webpack-hot-middleware');
-        app.use(webpackDevMiddleware(compiler,
-            {
-                noInfo: true, publicPath: config.output.publicPath,
-            }));
+        app.use(webpackDevMiddleware(compiler, {
+            noInfo: true, publicPath: config.output.publicPath,
+        }));
         app.use(webpackHotMiddleware(compiler));
     }
 }

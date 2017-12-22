@@ -9,3 +9,11 @@ export function getChinaSuntv()
         promise: ChinaSuntvApi.getChinaSuntv()
     };
 }
+
+export function sendMail(data, callback)
+{
+    ChinaSuntvApi.sendMail(data, (err, callBackData) =>
+    {
+        callback(err, callBackData);
+    });
+}

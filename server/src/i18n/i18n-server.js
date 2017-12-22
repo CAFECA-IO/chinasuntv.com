@@ -4,8 +4,7 @@ import { LanguageDetector } from 'i18next-express-middleware';
 
 i18n.use(Backend)
     .use(LanguageDetector)
-    .init(
-    {
+    .init({
         whitelist: ['ja', 'zh', 'en'],
 
         fallbackLng: 'zh',

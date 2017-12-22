@@ -34,11 +34,23 @@ function loadBranchData(branch, dispatch, url, query)
     return Promise.all(promises);
 }
 
+function videoJsScript(urlNoquery)
+{
+    let script = '';
+    if (urlNoquery === '/' || urlNoquery.indexOf('/search') !== -1 || urlNoquery.indexOf('/video') !== -1)
+    {
+        script = `<script src='/asset/js/videojs/videojs.min.js'></script>
+              <script src='/asset/js/videojs/videojs-contrib-hls.min.js'></script>`;
+    }
+
+    return script;
+}
+
 export default function render(app)
 {
     app.use((req, res, next) =>
     {
-        const url = req.url;
+        const { url } = req;
         if (url.indexOf('/api') !== -1 || url.indexOf('/favicon.ico') !== -1 || url.indexOf('/sitemap.xml') !== -1)
         {
             next();
@@ -91,6 +103,8 @@ export default function render(app)
                                             <meta name="viewport" content="width=device-width, initial-scale=1">
                                             <meta name="description" content="">
                                             <link rel="shortcut icon" href="/asset/img/favicon.ico" type="image/x-icon" />
+                                            <link rel="stylesheet" href='/asset/css/videojs/videojs.min.css' />
+                                            ${videoJsScript(urlNoquery)}
                                             ${bundleCss}
                                         </head>`, 'utf8');
                             res.write('<body><div id=root>', 'utf8');

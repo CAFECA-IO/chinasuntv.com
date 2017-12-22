@@ -1,9 +1,8 @@
 import React from 'react';
 import { translate } from 'react-i18next';
 import isNode from 'detect-node';
-import PropTypes from 'prop-types';
-import { withCookies } from 'react-cookie';
-import i18nClient from '../../i18n/i18n-client';
+import update from 'immutability-helper';
+import { addEventListener } from '../../utils/event';
 
 if (!isNode)
 {
@@ -16,40 +15,111 @@ class Header extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = {};
+        this.state = {
+            classes: {
+                header: '',
+            }
+        };
+        this.toggleMenu = this.toggleMenu.bind(this);
+        this.scroll = this.scroll.bind(this);
     }
 
-    langChange(e)
+    componentDidMount()
     {
-        i18nClient.changeLanguage(e.target.value);
-        this.props.cookies.set('xplayOffical', e.target.value);
+        const { body } = document;
+
+        if (window.innerWidth < 768)
+        {
+            this.headerFolded();
+        }
+        else
+        {
+            addEventListener(window, 'scroll', () => {
+                if ((body.scrollTop || document.documentElement.scrollTop) !== 0 && this.state.classes.header !== 'folded')
+                {
+                    this.headerFolded();
+                }
+                else if ((body.scrollTop || document.documentElement.scrollTop) === 0)
+                {
+                    this.headerOriginal();
+                }
+            });
+        }
+    }
+
+    headerOriginal()
+    {
+        this.setState(update(this.state, {
+            classes: {
+                header: { $set: '' }
+            }
+        }));
+    }
+
+    headerFolded()
+    {
+        this.setState(update(this.state, {
+            classes: {
+                header: { $set: 'folded' }
+            }
+        }));
+    }
+
+    toggleMenu()
+    {
+        const header = this.state.classes.header.indexOf('color') === -1 ? 'color' : 'folded';
+        const classObj = {
+            header
+        };
+
+        this.setState(update(this.state, {
+            classes: { $set: classObj }
+        }));
+    }
+
+    scroll(section)
+    {
+        const scrollTo = document.querySelector(section);
+        scrollTo.scrollIntoView({ behavior: 'smooth' });
+
+        this.setState(update(this.state, {
+            classes: {
+                header: { $set: 'folded' }
+            }
+        }));
     }
 
     render()
     {
+        const { header } = this.state.classes;
         return (
-            <header>
-                <div>
-                    <div className="f">
-                        <a href="/">
-                            <div className="logo bg" />
-                        </a>
-                    </div>
-                    <div className="langauge">
-                        <select value={this.props.cookies.get('xplayOffical')} onChange={::this.langChange}>
-                            <option value="zh">中文</option>
-                            <option value="ja">日本語</option>
-                            <option value="en">English</option>
-                        </select>
-                    </div>
+            <header className={header}>
+                <a href="/" className="logo">
+                    <img src="/asset/img/logo-suntv.svg" alt="tideiSun" />
+                    <img src="/asset/img/logo-type.svg" alt="tideiSun" />
+                </a>
+                <div className="slideNav">
+                    <nav>
+                        <div onClick={() => this.scroll('.c_programList')}>直播節目</div>
+                        <div onClick={() => this.scroll('.c_about')}>關於我們</div>
+                        <div onClick={() => this.scroll('.c_contact')}>聯繫我們</div>
+                    </nav>
+                    {/* <div className="contact">
+                        <div className="language">
+                            <span>日本語</span>
+                            <span>English</span>
+                            <span>中文</span>
+                        </div>
+                    </div> */}
+                </div>
+                <div className="hamburger" onClick={this.toggleMenu}>
+                    <span className="ham1" />
+                    <span className="ham2" />
+                    <span className="ham3" />
                 </div>
             </header>
         );
     }
 }
 
-Header.propTypes = {
-    cookies: PropTypes.object.isRequired
-};
-
-export default withCookies(Header);
+export default Header;
