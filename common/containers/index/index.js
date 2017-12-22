@@ -117,7 +117,7 @@ class Index extends React.Component
                 <div className="content">
                     <ChinaSuntv data={this.props.chinaSuntv.info} methods={{ getPreNowNext: ::this.getPreNowNext }} />
 
-                    <ProgramList data={this.props.chinaSuntv.info} />
+                    <ProgramList data={this.props.chinaSuntv.info} methods={{ getPreNowNext: ::this.getPreNowNext }} />
 
                     <About />
 

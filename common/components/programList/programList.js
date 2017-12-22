@@ -33,11 +33,8 @@ class ProgramList extends React.Component
         this.selectProgrmaList = this.selectProgrmaList.bind(this);
     }
 
-    componentDidMount()
+    componentWillUpdate()
     {
-        const element = document.querySelector('.programContainer');
-        element.childNodes[this.nowPlaying].classList.add('scroll');
-
         const scroll = document.querySelector('.scroll');
         scroll.parentNode.scrollTop = scroll.offsetTop - scroll.parentNode.offsetTop;
     }
@@ -147,7 +144,7 @@ class ProgramList extends React.Component
         );
     }
 
-    renderProgramLsit()
+    renderProgramList()
     {
         const { week, weekInfo } = this.props.data;
         let day = {
@@ -188,10 +185,11 @@ class ProgramList extends React.Component
 
         let programList = [];
         let programPlayed = [];
+        const nowPlay = this.props.methods.getPreNowNext().now[0];
         for (let item of arr)
         {
             const content = (
-                <div key={item.PlayTime}>
+                <div key={item.PlayTime} className={item.PlayTime.split(' ')[1] === nowPlay ? 'scroll' : ''}>
                     <div>{item.PlayTime.split(' ')[1]}</div>
                     <div><div>{item.prgColumn}</div></div>
                     <div>{item.prgName}</div>
@@ -205,7 +203,7 @@ class ProgramList extends React.Component
 
             programList.push(content);
         }
-
+        // console.log(programPlayed[programPlayed.length - 1].props.className);
         this.nowPlaying = programPlayed.length - 1;
 
         return (
@@ -230,14 +228,15 @@ class ProgramList extends React.Component
                 <div className="tabs">
                     {this.renderTabs()}
                 </div>
-                {this.renderProgramLsit()}
+                {this.renderProgramList()}
             </div>
         );
     }
 }
 
 ProgramList.propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    methods: PropTypes.object.isRequired
 };
 
 export default ProgramList;
