@@ -68,6 +68,7 @@ class About extends React.Component
                         <div className="rectangle">
                             <div className="content">
                                 <img alt="" src="/asset/img/boss@2x.png" />
+                                <div>陽光衛視董事長 陳平 先生</div>
                             </div>
                         </div>
                     </div>
