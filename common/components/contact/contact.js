@@ -180,7 +180,7 @@ class Contact extends React.Component
                         <div>
                             <div>T. +886 2-2700-1979</div>
                             <div>E. info@isuncloud.com</div>
-                            <div>A. 台北市大安區敦化南路2段77號21</div>
+                            <div>A. 台北市大安區敦化南路2段77號21樓</div>
                         </div>
                     </div>
                     <div>

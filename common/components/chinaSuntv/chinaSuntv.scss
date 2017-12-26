@@ -22,21 +22,21 @@
         width: 100%;
         margin: 0 auto;
 
-        > div.paddingBottom
-       {
-           width: 100%;
-           padding-bottom: 76.25%;
+         > div.paddingBottom
+        {
+            width: 100%;
+            padding-bottom: 76.25%;
 
-           @media (max-width: 480px)
-           {
-               // padding-bottom: 70.25%;
-           }
+            @media (max-width: 480px)
+            {
+                // padding-bottom: 70.25%;
+            }
 
-           @media (min-width: 481px) and (max-width: 767px)
-           {
-               // padding-bottom: 75.25%;
-           }
-       }
+            @media (min-width: 481px) and (max-width: 767px)
+            {
+                // padding-bottom: 75.25%;
+            }
+        }
 
         div[id^='vjs_video']
         {
@@ -73,6 +73,22 @@
 
          > div
         {
+            &.in
+            {
+                animation-name: fadein;
+                animation-duration: 800ms;
+                animation-timing-function: linear;
+            }
+
+            &.out
+            {
+                visibility: hidden;
+
+                animation-name: fadeout;
+                animation-duration: 800ms;
+                animation-timing-function: linear;
+            }
+
             &:first-child
             {
                 font-size: 13px;
@@ -143,16 +159,16 @@
 
                     width: 50%;
 
-                    @media (max-width: 767px)
-                    {
-                        width: 90%;
-                    }
-
                     content: '';
 
                     border: 1px solid #9b9b9b;
                     border-image-source: linear-gradient(to right, #000, #9b9b9b 10%, #9b9b9b 88%, #000);
                     border-image-slice: 1;
+
+                    @media (max-width: 767px)
+                    {
+                        width: 90%;
+                    }
                 }
 
                  > div
@@ -217,9 +233,47 @@
                 }
             }
 
+             > div
+            {
+                 > span
+                {
+                    &.in
+                    {
+                        animation-name: fadein;
+                        animation-duration: 800ms;
+                        animation-timing-function: linear;
+                    }
+
+                    &.out
+                    {
+                        visibility: hidden;
+
+                        animation-name: fadeout;
+                        animation-duration: 800ms;
+                        animation-timing-function: linear;
+                    }
+                }
+            }
+
              > span
             {
                 flex: 1;
+
+                &.in
+                {
+                    animation-name: fadein;
+                    animation-duration: 800ms;
+                    animation-timing-function: linear;
+                }
+
+                &.out
+                {
+                    visibility: hidden;
+
+                    animation-name: fadeout;
+                    animation-duration: 800ms;
+                    animation-timing-function: linear;
+                }
             }
         }
 

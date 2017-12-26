@@ -1,8 +1,8 @@
 import React from 'react';
 import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
-// import update from 'immutability-helper';
-// import equal from 'deep-equal';
+import update from 'immutability-helper';
+import moment from 'moment';
 import isNode from 'detect-node';
 
 if (!isNode)
@@ -16,7 +16,9 @@ class ChinaSuntv extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = {};
+        this.state = {
+            fade: 'in'
+        };
     }
 
     componentDidMount()
@@ -26,9 +28,30 @@ class ChinaSuntv extends React.Component
         this.videoPlayer.play();
     }
 
+    componentWillReceiveProps()
+    {
+        const { next } = this.props.data.preNowNext;
+        const hour = next[0].split(':')[0];
+
+        // 早上九點前，時是一位數，最前面補 0
+        if (moment().format('HH:mm:ss') === (hour.length === 1 ? `0${next[0]}:01` : `${next[0]}:01`))
+        {
+            this.setState(update(this.state, {
+                fade: { $set: 'out' }
+            }), () => {
+                setTimeout(() => {
+                    this.setState(update(this.state, {
+                        fade: { $set: 'in' }
+                    }));
+                }, 800);
+            });
+        }
+    }
+
     render()
     {
-        const { pre, now, next } = this.props.methods.getPreNowNext();
+        const { pre, now, next } = this.props.data.preNowNext;
+        const { fade } = this.state;
 
         return (
             <div className="c_chinaSuntv">
@@ -45,14 +68,14 @@ class ChinaSuntv extends React.Component
 
                 <div className="nowPlaying">
                     <div>Now Playing</div>
-                    <div>{now[2]}</div>
+                    <div className={fade}>{now[2]}</div>
                 </div>
 
                 <div className="preNext">
                     <div>
-                        <span>{pre[0]}</span>
-                        <span>{now[0]}</span>
-                        <span>{next[0]}</span>
+                        <span className={fade}>{pre[0]}</span>
+                        <span className={fade}>{now[0]}</span>
+                        <span className={fade}>{next[0]}</span>
                     </div>
                     <div>
                         <div><div /></div>
@@ -60,14 +83,14 @@ class ChinaSuntv extends React.Component
                         <div><div /></div>
                     </div>
                     <div className="programTag">
-                        <div><span>{pre[1]}</span></div>
-                        <div className="center"><span>{now[1]}</span></div>
-                        <div><span>{next[1]}</span></div>
+                        <div><span className={fade}>{pre[1]}</span></div>
+                        <div className="center"><span className={fade}>{now[1]}</span></div>
+                        <div><span className={fade}>{next[1]}</span></div>
                     </div>
                     <div className="programName">
-                        <span>{pre[2]}</span>
-                        <span className="center">{now[2]}</span>
-                        <span>{next[2]}</span>
+                        <span className={fade}>{pre[2]}</span>
+                        <span className={`center ${fade}`}>{now[2]}</span>
+                        <span className={fade}>{next[2]}</span>
                     </div>
                 </div>
             </div>
@@ -76,7 +99,7 @@ class ChinaSuntv extends React.Component
 }
 
 ChinaSuntv.propTypes = {
-    methods: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired
 };
 
 export default ChinaSuntv;

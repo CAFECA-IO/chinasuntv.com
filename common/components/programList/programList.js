@@ -41,10 +41,11 @@ class ProgramList extends React.Component
 
     componentDidUpdate()
     {
-        const { now } = this.props.methods.getPreNowNext();
+        const { now } = this.props.data.preNowNext;
         const scroll = document.querySelector('.scroll');
+        const hour = now[0].split(':')[0];
 
-        if (moment().format('HH:mm:ss') === `${now[0]}:00`)
+        if (moment().format('HH:mm:ss') === (hour.length === 1 ? `0${now[0]}:01` : `${now[0]}:01`))
         {
             scroll.parentNode.scrollTop = scroll.offsetTop - scroll.parentNode.offsetTop;
         }
@@ -74,12 +75,13 @@ class ProgramList extends React.Component
     renderTabs()
     {
         const { tabs } = this.state;
-        const { week } = this.props.data;
+        const { week } = this.props.data.programInfo;
         let weekTabs = [];
         let today;
         let yesterday;
         let tomorrow;
 
+        // for RWD
         switch (moment().format('dddd').slice(0, 3))
         {
             case 'Mon':
@@ -157,7 +159,7 @@ class ProgramList extends React.Component
 
     renderProgramList()
     {
-        const { week, weekInfo } = this.props.data;
+        const { week, weekInfo } = this.props.data.programInfo;
         let day = {
             Mon: week[0],
             Tue: week[1],
@@ -195,8 +197,7 @@ class ProgramList extends React.Component
         }
 
         let programList = [];
-        let programPlayed = [];
-        const nowPlay = this.props.methods.getPreNowNext().now[0];
+        const nowPlay = this.props.data.preNowNext.now[0];
         for (let item of arr)
         {
             const content = (
@@ -207,14 +208,8 @@ class ProgramList extends React.Component
                 </div>
             );
 
-            if (new Date() / 1 > new Date(item.PlayTime) / 1)
-            {
-                programPlayed.push(content);
-            }
-
             programList.push(content);
         }
-        this.nowPlaying = programPlayed.length - 1;
 
         return (
             <div className="programList">
@@ -245,8 +240,7 @@ class ProgramList extends React.Component
 }
 
 ProgramList.propTypes = {
-    data: PropTypes.object.isRequired,
-    methods: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired
 };
 
 export default ProgramList;

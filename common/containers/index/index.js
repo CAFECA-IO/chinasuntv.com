@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import isNode from 'detect-node';
 import DocumentMeta from 'react-document-meta';
 import update from 'immutability-helper';
+import moment from 'moment';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import ChinaSuntv from '../../components/chinaSuntv/chinaSuntv';
@@ -52,6 +53,21 @@ class Index extends React.Component
         }, 1000);
     }
 
+    shouldComponentUpdate()
+    {
+        const arr = this.getPreNowNext().now;
+        const hour = arr[0].split(':')[0];
+
+        if (moment(new Date(this.state.nowTime)).format('HH:mm:ss') === (hour.length === 1 ? `0${arr[0]}:00` : `${arr[0]}:00`))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     getPreNowNext()
     {
         const { nowTime } = this.state;
@@ -85,7 +101,7 @@ class Index extends React.Component
         Object.keys(preNowNext).map((item, index) => {
             let play = prePlayed + index;
 
-            // 現在時間是當天最早節目 或 最晚節目，要取昨天的最後一筆節目 或 隔天的第一筆節目
+            // 現在時間若是當天最早節目，要取到昨天的最後一筆節目；若是當天最晚節目，要取到隔天的第一筆節目
             if (play === weekInfo.length)
             {
                 play = 0;
@@ -106,6 +122,8 @@ class Index extends React.Component
 
     render()
     {
+        const preNowNext = this.getPreNowNext();
+
         return (
             <div className="co_index">
 
@@ -115,9 +133,9 @@ class Index extends React.Component
                 <Header />
 
                 <div className="content">
-                    <ChinaSuntv data={this.props.chinaSuntv.info} methods={{ getPreNowNext: ::this.getPreNowNext }} />
+                    <ChinaSuntv data={{ preNowNext }} />
 
-                    <ProgramList data={this.props.chinaSuntv.info} methods={{ getPreNowNext: ::this.getPreNowNext }} />
+                    <ProgramList data={{ programInfo: this.props.chinaSuntv.info, preNowNext }} />
 
                     <About />
 
