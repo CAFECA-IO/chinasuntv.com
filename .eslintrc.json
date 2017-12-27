@@ -7,8 +7,7 @@
     "extends": "airbnb",
     "globals": {
         "log": true,
-        "cookies": true,
-        "braintree": true,
+        "browserCookies": true,
         "videojs": true
     },
     "parser": "babel-eslint",
@@ -42,6 +41,7 @@
         "jsx-a11y/no-static-element-interactions": 0,
         "jsx-a11y/click-events-have-key-events": 1,
         "jsx-a11y/media-has-caption": 0,
+        "jsx-a11y/anchor-is-valid": 0,
         "max-len": [
             1,
             400,
@@ -50,6 +50,7 @@
             }
         ],
         "no-case-declarations": 0,
+        "no-restricted-globals": 0,
         "no-continue": 0,
         "no-console": 2,
         "no-else-return": 0,
