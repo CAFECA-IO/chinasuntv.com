@@ -79,7 +79,7 @@ module.exports = {
         }),
         new ExtractTextPlugin({
             filename: '../../css/bundle/bundle.min.css',
-            allChunks: false
+            allChunks: true
         })
     ],
 };
