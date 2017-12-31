@@ -70,8 +70,10 @@ class Index extends React.Component
 
     getPreNowNext()
     {
+        let today = (new Date().getDay() === 0) ? 6 : new Date().getDay() - 1;
         const { nowTime } = this.state;
-        let week = this.props.chinaSuntv.info.week[new Date().getDay() - 1];
+
+        let week = this.props.chinaSuntv.info.week[today];
         let weekInfo = this.props.chinaSuntv.info.weekInfo[week];
         let programPlayed = [];
         let preNowNext = {
