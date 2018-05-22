@@ -70,11 +70,13 @@ class Index extends React.Component
 
     getPreNowNext()
     {
-        let today = (new Date().getDay() === 0) ? 6 : new Date().getDay() - 1;
+        const whichDay = new Date().getDay();
         const { nowTime } = this.state;
+        let today = (whichDay === 0) ? 6 : whichDay - 1;
+        const { info } = this.props.chinaSuntv;
 
-        let week = this.props.chinaSuntv.info.week[today];
-        let weekInfo = this.props.chinaSuntv.info.weekInfo[week];
+        let week = info.week[today];
+        let weekInfo = info.weekInfo[week];
         let programPlayed = [];
         let preNowNext = {
             pre: [],
@@ -107,14 +109,14 @@ class Index extends React.Component
             if (play === weekInfo.length)
             {
                 play = 0;
-                week = this.props.chinaSuntv.info.week[new Date().getDay()];
-                weekInfo = this.props.chinaSuntv.info.weekInfo[week];
+                week = info.week[whichDay];
+                weekInfo = info.weekInfo[week];
             }
             else if (play === -1)
             {
                 play = weekInfo.length - 1;
-                week = this.props.chinaSuntv.info.week[new Date().getDay() - 2];
-                weekInfo = this.props.chinaSuntv.info.weekInfo[week];
+                week = info.week[whichDay - 2];
+                weekInfo = info.weekInfo[week];
             }
             return preNowNext[item].push(weekInfo[play].PlayTime.split(' ')[1], weekInfo[play].prgColumn, weekInfo[play].prgName);
         });

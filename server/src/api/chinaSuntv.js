@@ -15,7 +15,7 @@ export default
     exec(req, res)
     {
         nodexj({
-            input: './public/asset/chinaSuntv/chinasuntv.xls', // input xls
+            input: './xls/chinasuntv.xls', // input xls
             output: null, // output json
         }, (err, result) => {
             let arr = [];

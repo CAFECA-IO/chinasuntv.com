@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "iSuntvLive website",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node -r babel-register ./server/server.js",
+    "dev": "NODE_ENV=development node -r babel-register ./server/server.js",
     "prod": "cross-env node ./build/server.js",
     "build": "NODE_ENV=production webpack -p --config webpack.server.prod.config.js && NODE_ENV=production webpack -p --config webpack.client.prod.config.js",
     "lint": "eslint ./ --cache --ignore-pattern .gitignore .eslintignore",
@@ -63,6 +63,8 @@
     "spdy": "^3.4.7",
     "superagent": "^3.8.2",
     "universal-cookie-express": "^2.1.2",
+    "video.js": "^7.0.2",
+    "videojs-contrib-hls": "^5.14.1",
     "xls-to-json": "^0.4.0"
   },
   "devDependencies": {
