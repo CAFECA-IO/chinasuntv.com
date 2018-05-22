@@ -4,7 +4,7 @@ export function getChinaSuntv()
 {
     return new Promise((resolve, reject) =>
     {
-        get('/api/chinaSuntv')
+        get('127.0.0.1/api/chinaSuntv')
             .set('Accept', 'application/json')
             .end((err, res) =>
             {
