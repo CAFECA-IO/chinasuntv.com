@@ -2,15 +2,15 @@ import React from 'react';
 import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 import update from 'immutability-helper';
-import videojs from 'video.js';
+// import videojs from 'video.js';
 import moment from 'moment';
 import isNode from 'detect-node';
-import 'videojs-contrib-hls';
+// import 'videojs-contrib-hls';
 
 if (!isNode)
 {
     require('./chinaSuntv.scss');
-    require('video.js/dist/video-js.css');
+    // require('video.js/dist/video-js.css');
 }
 
 @translate([], { wait: isNode ? false : true })
@@ -27,7 +27,7 @@ class ChinaSuntv extends React.Component
     componentDidMount()
     {
         this.videoPlayer = videojs(this.player);
-        this.videoPlayer.src({ src: 'https://stream.isuntv.com/680k/mid_video_index.m3u8' });
+        this.videoPlayer.src({ type: 'application/x-mpegURL', src: '//stream.isuntv.com/680k/mid_video_index.m3u8' });
         this.videoPlayer.play();
     }
 

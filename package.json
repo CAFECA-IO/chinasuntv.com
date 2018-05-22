@@ -63,8 +63,6 @@
     "spdy": "^3.4.7",
     "superagent": "^3.8.2",
     "universal-cookie-express": "^2.1.2",
-    "video.js": "^7.0.2",
-    "videojs-contrib-hls": "^5.14.1",
     "xls-to-json": "^0.4.0"
   },
   "devDependencies": {
