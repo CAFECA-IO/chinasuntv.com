@@ -34,16 +34,10 @@ function loadBranchData(branch, dispatch, url, query)
     return Promise.all(promises);
 }
 
-function videoJsScript(urlNoquery)
+function videoJsScript()
 {
-    let script = '';
-    if (urlNoquery === '/' || urlNoquery.indexOf('/search') !== -1 || urlNoquery.indexOf('/video') !== -1)
-    {
-        script = `<script src='/asset/js/videojs/videojs.min.js'></script>
-              <script src='/asset/js/videojs/videojs-contrib-hls.min.js'></script>`;
-    }
-
-    return script;
+    return `<script src='http://vjs.zencdn.net/7.0.2/video.min.js'></script>
+          <script src='https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.min.js'></script>`;
 }
 
 export default function render(app)
@@ -104,7 +98,7 @@ export default function render(app)
                                             <meta name="description" content="">
                                             <link rel="shortcut icon" href="/asset/img/favicon.ico" type="image/x-icon" />
                                             <link rel="stylesheet" href='/asset/css/videojs/videojs.min.css' />
-                                            ${videoJsScript(urlNoquery)}
+                                            ${videoJsScript()}
                                             ${bundleCss}
                                         </head>`, 'utf8');
                             res.write('<body><div id=root>', 'utf8');
