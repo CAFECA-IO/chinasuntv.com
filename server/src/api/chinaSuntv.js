@@ -67,8 +67,6 @@ export default
                 data.weekInfo = weekData;
             }
 
-            console.log(data.week);
-
             res.json({
                 result: resultCode,
                 message,

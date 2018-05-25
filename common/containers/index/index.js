@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 import isNode from 'detect-node';
@@ -13,6 +14,7 @@ import ProgramList from '../../components/programList/programList';
 import Contact from '../../components/contact/contact';
 import About from '../../components/about/about';
 import { meta as metaObj } from '../../constants/meta';
+import * as chinaSuntvAction from '../../actions/chinaSuntv';
 
 if (!isNode)
 {
@@ -26,9 +28,13 @@ function mapStateToProps(state)
     };
 }
 
-function mapDispatchToProps()
+function mapDispatchToProps(dispatch)
 {
-    return {};
+    return {
+        actions: {
+            chinaSuntvAction: bindActionCreators(chinaSuntvAction, dispatch)
+        }
+    };
 }
 
 
@@ -39,13 +45,16 @@ class Index extends React.Component
     {
         super(props);
         this.state = {
-            nowTime: new Date() / 1
+            nowTime: new Date() / 1,
+            info: {}
         };
         this.meta = metaObj;
     }
 
     componentDidMount()
     {
+        this.props.actions.chinaSuntvAction.getChinaSuntv();
+
         setInterval(() => {
             this.setState(update(this.state, {
                 nowTime: { $set: new Date() / 1 }
@@ -53,20 +62,20 @@ class Index extends React.Component
         }, 1000);
     }
 
-    shouldComponentUpdate()
-    {
-        const arr = this.getPreNowNext().now;
-        const hour = arr[0].split(':')[0];
-
-        if (moment(new Date(this.state.nowTime)).format('HH:mm:ss') === (hour.length === 1 ? `0${arr[0]}:00` : `${arr[0]}:00`))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    // shouldComponentUpdate(nextProps)
+    // {
+    //     const arr = this.props.chinaSuntv.info.week.length === 0 ? [] : this.getPreNowNext().now;
+    //     const hour = moment(new Date(this.state.nowTime)).format('HH');
+    //
+    //     if (moment(new Date(this.state.nowTime)).format('HH:mm:ss') === (hour.length === 1 ? `0${arr[0]}:00` : `${arr[0]}:00`))
+    //     {
+    //         return true;
+    //     }
+    //     else
+    //     {
+    //         return false;
+    //     }
+    // }
 
     getPreNowNext()
     {
@@ -126,7 +135,7 @@ class Index extends React.Component
 
     render()
     {
-        const preNowNext = this.getPreNowNext();
+        const preNowNext = this.props.chinaSuntv.info.week.length === 0 ? {} : this.getPreNowNext();
 
         return (
             <div className="co_index">
@@ -155,7 +164,8 @@ class Index extends React.Component
 
 Index.propTypes = {
     // t: PropTypes.func.isRequired,
-    chinaSuntv: PropTypes.object.isRequired
+    chinaSuntv: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);

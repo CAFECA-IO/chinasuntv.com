@@ -35,8 +35,18 @@ class ProgramList extends React.Component
 
     componentDidMount()
     {
+        // const scroll = document.querySelector('.scroll');
+        // scroll.parentNode.scrollTop = scroll.offsetTop - scroll.parentNode.offsetTop;
+    }
+
+    componentWillReceiveProps()
+    {
         const scroll = document.querySelector('.scroll');
-        scroll.parentNode.scrollTop = scroll.offsetTop - scroll.parentNode.offsetTop;
+
+        if (scroll !== null)
+        {
+            scroll.parentNode.scrollTop = scroll.offsetTop - scroll.parentNode.offsetTop;
+        }
     }
 
     componentDidUpdate()
@@ -76,10 +86,20 @@ class ProgramList extends React.Component
     {
         const { tabs } = this.state;
         const { week } = this.props.data.programInfo;
+        const todayDay = new Date().getDay();
         let weekTabs = [];
         let today;
         let yesterday;
         let tomorrow;
+        let chineseWeek = {
+            Mon: 'ㄧ',
+            Tue: '二',
+            Wed: '三',
+            Thu: '四',
+            Fri: '五',
+            Sat: '六',
+            Sun: '日',
+        };
 
         // for RWD
         switch (moment().format('dddd').slice(0, 3))
@@ -112,34 +132,8 @@ class ProgramList extends React.Component
             // 用 moment 以日期取得星期幾
             const date = week[key].split('/')[1];
             const weekDate = moment(new Date(week[key])).format('dddd').slice(0, 3);
-            const todayDay = new Date().getDay();
-            let day;
 
-            switch (weekDate)
-            {
-                case 'Mon':
-                    day = '一';
-                    break;
-                case 'Tue':
-                    day = '二';
-                    break;
-                case 'Wed':
-                    day = '三';
-                    break;
-                case 'Thu':
-                    day = '四';
-                    break;
-                case 'Fri':
-                    day = '五';
-                    break;
-                case 'Sat':
-                    day = '六';
-                    break;
-                case 'Sun':
-                    day = '日';
-                    break;
-                default:
-            }
+            const day = chineseWeek[weekDate];
 
             const content = (
                 <div key={week[key]} className={`${tabs[weekDate]}${todayDay === Number(key) + today || todayDay === Number(key) + yesterday || todayDay === Number(key) + tomorrow ? '' : ' hidden'}`} onClick={() => this.selectProgrmaList(weekDate)}>
@@ -197,27 +191,35 @@ class ProgramList extends React.Component
         }
 
         let programList = [];
-        const nowPlay = this.props.data.preNowNext.now[0];
-        for (let item of arr)
+        const nowPlay = Object.keys(this.props.data.preNowNext).length !== 0 ? this.props.data.preNowNext.now[0] : '';
+
+        if (Object.keys(this.props.data.preNowNext).length !== 0)
         {
-            const content = (
-                <div key={item.PlayTime} className={item.PlayTime.split(' ')[1] === nowPlay ? 'scroll' : ''}>
-                    <div>{item.PlayTime.split(' ')[1]}</div>
-                    <div><div>{item.prgColumn}</div></div>
-                    <div>{item.prgName}</div>
+            for (let item of arr)
+            {
+                const content = (
+                    <div key={item.PlayTime} className={item.PlayTime.split(' ')[1] === nowPlay ? 'scroll' : ''}>
+                        <div>{item.PlayTime.split(' ')[1]}</div>
+                        <div><div>{item.prgColumn}</div></div>
+                        <div>{item.prgName}</div>
+                    </div>
+                );
+
+                programList.push(content);
+            }
+
+            return (
+                <div className="programList">
+                    <div className="programContainer">
+                        {programList}
+                    </div>
                 </div>
             );
-
-            programList.push(content);
         }
-
-        return (
-            <div className="programList">
-                <div className="programContainer">
-                    {programList}
-                </div>
-            </div>
-        );
+        else
+        {
+            return null;
+        }
     }
 
     render()
