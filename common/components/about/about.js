@@ -28,7 +28,7 @@ class About extends React.Component
                     <div className="part">
                         <div className="rectangle">
                             <div className="rect" />
-                            <div className="subTitle">衛視簡介1</div>
+                            <div className="subTitle">衛視簡介</div>
                             <div className="content">陽光衛視是全球唯一一家華語獨立言論及紀錄片電視頻道。<br />
                               陽光衛視2000年創辦于中國香港，為24小時全天候中文衛星頻道，以香港、北京、台北為節目核心製作基地，以製作歷史、人文、財經、時政節目和記錄片為主要內容，為公民話語、學者思想提供開放空間和獨立平臺。<br />
                               新聞報導評論，匯集全球時政要聞，挖掘中國深度新聞，解釋世俗之疑，辨照是非之理，尊崇獨立思考，相容天下言論；紀錄片以全球化視野，本土化關懷，以獨立的姿態，盡力展現社會真實之面貌，還曆史以真相。<br />
