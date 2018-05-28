@@ -36,8 +36,8 @@ function loadBranchData(branch, dispatch, url, query)
 
 function videoJsScript()
 {
-    return `<script src='https://vjs.zencdn.net/7.0.2/video.min.js'></script>
-          <script src='https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.min.js'></script>`;
+    return `<script src='/asset/js/videojs/videojs.min.js'></script>
+          <script src='/asset/js/videojs/videojs-contrib-hls.min.js'></script>`;
 }
 
 export default function render(app)
