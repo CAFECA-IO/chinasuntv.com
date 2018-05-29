@@ -25,7 +25,7 @@ export default function (app)
         resave: false,
         saveUninitialized: true,
         httpOnly: true,
-        secure: false,
+        secure: false
     }));
     app.use((req, res, next) =>
     {
@@ -41,6 +41,8 @@ export default function (app)
         {
             res.setHeader('Content-Type', 'application/javascript');
         }
+
+        res.setHeader('Cache-Control', 'max-age=60000');
 
         next();
     });
