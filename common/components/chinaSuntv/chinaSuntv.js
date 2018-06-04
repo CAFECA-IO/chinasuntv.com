@@ -35,27 +35,34 @@ class ChinaSuntv extends React.Component
 
     componentWillReceiveProps()
     {
-        const { next } = this.props.data.preNowNext;
-        const hour = next[0].split(':')[0];
+        const { preNowNext } = this.props.data;
+        const emptyObj = Object.keys(preNowNext).length;
 
-        // 早上九點前，時是一位數，最前面補 0
-        if (moment().format('HH:mm:ss') === (hour.length === 1 ? `0${next[0]}:01` : `${next[0]}:01`))
+        if (emptyObj !== 0)
         {
-            this.setState(update(this.state, {
-                fade: { $set: 'out' }
-            }), () => {
-                setTimeout(() => {
-                    this.setState(update(this.state, {
-                        fade: { $set: 'in' }
-                    }));
-                }, 800);
-            });
+            const hour = preNowNext.next[0].split(':')[0];
+
+            // 早上九點前，時是一位數，最前面補 0
+            if (moment().format('HH:mm:ss') === (hour.length === 1 ? `0${preNowNext.next[0]}:01` : `${preNowNext.next[0]}:01`))
+            {
+                this.setState(update(this.state, {
+                    fade: { $set: 'out' }
+                }), () => {
+                    setTimeout(() => {
+                        this.setState(update(this.state, {
+                            fade: { $set: 'in' }
+                        }));
+                    }, 800);
+                });
+            }
         }
     }
 
     render()
     {
-        const { pre, now, next } = this.props.data.preNowNext;
+        const { preNowNext } = this.props.data;
+        const emptyObj = Object.keys(preNowNext).length;
+
         const { fade } = this.state;
 
         return (
@@ -73,14 +80,14 @@ class ChinaSuntv extends React.Component
 
                 <div className="nowPlaying">
                     <div>Now Playing</div>
-                    <div className={fade}>{now[2]}</div>
+                    <div className={fade}>{emptyObj !== 0 ? preNowNext.now[2] : ''}</div>
                 </div>
 
                 <div className="preNext">
                     <div>
-                        <span className={fade}>{pre[0]}</span>
-                        <span className={fade}>{now[0]}</span>
-                        <span className={fade}>{next[0]}</span>
+                        <span className={fade}>{emptyObj !== 0 ? preNowNext.pre[0] : ''}</span>
+                        <span className={fade}>{emptyObj !== 0 ? preNowNext.now[0] : ''}</span>
+                        <span className={fade}>{emptyObj !== 0 ? preNowNext.next[0] : ''}</span>
                     </div>
                     <div>
                         <div><div /></div>
@@ -88,14 +95,14 @@ class ChinaSuntv extends React.Component
                         <div><div /></div>
                     </div>
                     <div className="programTag">
-                        <div><span className={fade}>{pre[1]}</span></div>
-                        <div className="center"><span className={fade}>{now[1]}</span></div>
-                        <div><span className={fade}>{next[1]}</span></div>
+                        <div><span className={fade}>{emptyObj !== 0 ? preNowNext.pre[1] : ''}</span></div>
+                        <div className="center"><span className={fade}>{emptyObj !== 0 ? preNowNext.now[1] : ''}</span></div>
+                        <div><span className={fade}>{emptyObj !== 0 ? preNowNext.next[1] : ''}</span></div>
                     </div>
                     <div className="programName">
-                        <span className={fade}>{pre[2]}</span>
-                        <span className={`center ${fade}`}>{now[2]}</span>
-                        <span className={fade}>{next[2]}</span>
+                        <span className={fade}>{emptyObj !== 0 ? preNowNext.pre[2] : ''}</span>
+                        <span className={`center ${fade}`}>{emptyObj !== 0 ? preNowNext.now[2] : ''}</span>
+                        <span className={fade}>{emptyObj !== 0 ? preNowNext.next[2] : ''}</span>
                     </div>
                 </div>
             </div>

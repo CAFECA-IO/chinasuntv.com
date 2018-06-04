@@ -1,5 +1,5 @@
 import { Index } from '../routes/containerServer';
-import * as chinaSuntvAction from '../actions/chinaSuntv';
+// import * as chinaSuntvAction from '../actions/chinaSuntv';
 
 if (undefined === global.System.import)
 {
@@ -14,8 +14,8 @@ export const routes = [
         component: Index,
         path: '/',
         exact: true,
-        loadData: (dispatch, params) => Promise.all([
-            dispatch(chinaSuntvAction.getChinaSuntv(params))
-        ])
+        // loadData: (dispatch, params) => Promise.all([
+        //     dispatch(chinaSuntvAction.getChinaSuntv(params))
+        // ])
     }
 ];

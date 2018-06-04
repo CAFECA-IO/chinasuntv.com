@@ -1,7 +1,9 @@
 import update from 'immutability-helper';
 import * as types from '../constants/actionTypesChinaSuntv';
 
-const initialItems = {};
+const initialItems = {
+    info: { week: [], weekInfo: {} }
+};
 
 export default function getChinaSuntv(state = initialItems, action = {})
 {
