@@ -20,8 +20,6 @@ export default
         const dayOfWeek = moment(taipeiTime).format('E');
         const thisMonday = moment(taipeiTime).subtract(dayOfWeek - 1, 'days').format('YYYYMMDD');
 
-        console.log(thisMonday);
-
         nodexj({
             input: `./xls/${thisMonday}chinasuntv.xls`, // input xls
             output: null, // output json
