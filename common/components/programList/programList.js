@@ -55,7 +55,6 @@ class ProgramList extends React.Component
     componentDidUpdate()
     {
         const { now } = this.props.data.preNowNext;
-        console.log(now);
         const scroll = document.querySelector('.scroll');
 
         const hour = now[0].split(':')[0];
