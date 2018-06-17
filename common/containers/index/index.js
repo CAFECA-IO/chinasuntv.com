@@ -144,7 +144,8 @@ class Index extends React.Component
             // 若現在時間是還在播前一天最後一個節目
             else if (play === -2)
             {
-                week = info.week[whichDay - 2];
+                const day = whichDay - 2 <= 0 ? 0 : whichDay - 2;
+                week = info.week[day];
                 weekInfo = info.weekInfo[week];
                 play = weekInfo.length - 2;
             }
