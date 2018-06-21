@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "iSuntvLive website",
   "scripts": {
-    "dev": "NODE_ENV=development node -r babel-register ./server/server.js",
+    "dev": "PORT=3000 NODE_ENV=development node -r babel-register ./server/server.js",
     "prod": "cross-env node ./build/server.js",
     "build": "NODE_ENV=production webpack -p --config webpack.server.prod.config.js && NODE_ENV=production webpack -p --config webpack.client.prod.config.js",
     "lint": "eslint ./ --cache --ignore-pattern .gitignore .eslintignore",
@@ -42,6 +42,7 @@
     "immutability-helper": "^2.6.0",
     "lodash": "^4.17.4",
     "moment": "^2.19.3",
+    "moment-timezone": "^0.5.20",
     "nodemailer": "^4.4.0",
     "normalize.css": "^7.0.0",
     "prop-types": "^15.6.0",

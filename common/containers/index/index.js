@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import isNode from 'detect-node';
 import DocumentMeta from 'react-document-meta';
 import update from 'immutability-helper';
-import moment from 'moment';
+// import moment from 'moment';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import ChinaSuntv from '../../components/chinaSuntv/chinaSuntv';
@@ -60,6 +60,10 @@ class Index extends React.Component
                 nowTime: { $set: new Date() / 1 }
             }));
         }, 1000);
+
+        setInterval(() => {
+            this.props.actions.chinaSuntvAction.getChinaSuntv();
+        }, 10000);
     }
 
     // shouldComponentUpdate(nextProps)
@@ -127,6 +131,7 @@ class Index extends React.Component
                 week = info.week[whichDay - 2];
                 weekInfo = info.weekInfo[week];
             }
+            console.log(PlayTime);
             return preNowNext[item].push(weekInfo[play].PlayTime.split(' ')[1], weekInfo[play].prgColumn, weekInfo[play].prgName);
         });
 

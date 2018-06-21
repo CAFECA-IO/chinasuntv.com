@@ -2,6 +2,7 @@ import React from 'react';
 import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 import isNode from 'detect-node';
+import equal from 'deep-equal';
 import update from 'immutability-helper';
 import moment from 'moment';
 
@@ -35,15 +36,17 @@ class ProgramList extends React.Component
 
     componentDidMount()
     {
-        // const scroll = document.querySelector('.scroll');
-        // scroll.parentNode.scrollTop = scroll.offsetTop - scroll.parentNode.offsetTop;
+        setTimeout(() => {
+            const scroll = document.querySelector('.scroll');
+            scroll.parentNode.scrollTop = scroll.offsetTop - scroll.parentNode.offsetTop;
+        }, 500);
     }
 
-    componentWillReceiveProps()
+    componentWillReceiveProps(nextProps)
     {
         const scroll = document.querySelector('.scroll');
 
-        if (scroll !== null)
+        if (scroll !== null && !equal(nextProps, this.props))
         {
             scroll.parentNode.scrollTop = scroll.offsetTop - scroll.parentNode.offsetTop;
         }
@@ -52,7 +55,9 @@ class ProgramList extends React.Component
     componentDidUpdate()
     {
         const { now } = this.props.data.preNowNext;
+        // console.log(now);
         const scroll = document.querySelector('.scroll');
+
         const hour = now[0].split(':')[0];
 
         if (moment().format('HH:mm:ss') === (hour.length === 1 ? `0${now[0]}:01` : `${now[0]}:01`))
