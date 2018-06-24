@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import isNode from 'detect-node';
 import DocumentMeta from 'react-document-meta';
 import update from 'immutability-helper';
-import moment from 'moment';
+// import moment from 'moment';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import ChinaSuntv from '../../components/chinaSuntv/chinaSuntv';
@@ -60,6 +60,10 @@ class Index extends React.Component
                 nowTime: { $set: new Date() / 1 }
             }));
         }, 1000);
+
+        setInterval(() => {
+            this.props.actions.chinaSuntvAction.getChinaSuntv();
+        }, 10000);
     }
 
     // shouldComponentUpdate(nextProps)
@@ -79,11 +83,17 @@ class Index extends React.Component
 
     getPreNowNext()
     {
+        // 找出當天是禮拜幾
         const whichDay = new Date().getDay();
         const { nowTime } = this.state;
+
+        // 減 1 找出在陣列中的 index
         let today = (whichDay === 0) ? 6 : whichDay - 1;
         const { info } = this.props.chinaSuntv;
 
+        // console.log(info, new Date());
+
+        // week:當天日期；weekInfo:當天節目表
         let week = info.week[today];
         let weekInfo = info.weekInfo[week];
         let programPlayed = [];
@@ -103,30 +113,48 @@ class Index extends React.Component
                 </div>
             );
 
+            // 把已播出的節目存在陣列，即可知前一節目
             if (nowTime > new Date(item.PlayTime) / 1)
             {
                 programPlayed.push(content);
             }
         }
 
+        // 前一節目的 index
         const prePlayed = programPlayed.length - 2;
 
         Object.keys(preNowNext).map((item, index) => {
             let play = prePlayed + index;
+            // console.log(play, item);
 
-            // 現在時間若是當天最早節目，要取到昨天的最後一筆節目；若是當天最晚節目，要取到隔天的第一筆節目
+            // 若是當天最晚節目，要取到隔天的第一筆節目
             if (play === weekInfo.length)
             {
-                play = 0;
                 week = info.week[whichDay];
                 weekInfo = info.weekInfo[week];
+                play = 0;
             }
+            // 若現在時間是當天最早節目，要取到昨天的最後一筆節目
             else if (play === -1)
             {
+                week = info.week[whichDay - 1];
+                weekInfo = info.weekInfo[week];
                 play = weekInfo.length - 1;
-                week = info.week[whichDay - 2];
+            }
+            // 若現在時間是還在播前一天最後一個節目
+            else if (play === -2)
+            {
+                const day = whichDay - 2 <= 0 ? 0 : whichDay - 2;
+                week = info.week[day];
+                weekInfo = info.weekInfo[week];
+                play = weekInfo.length - 2;
+            }
+            else
+            {
+                week = info.week[today];
                 weekInfo = info.weekInfo[week];
             }
+
             return preNowNext[item].push(weekInfo[play].PlayTime.split(' ')[1], weekInfo[play].prgColumn, weekInfo[play].prgName);
         });
 

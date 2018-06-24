@@ -1,4 +1,6 @@
 import nodexj from 'xls-to-json';
+import moment from 'moment-timezone';
+
 
 export default
 {
@@ -14,8 +16,12 @@ export default
 
     exec(req, res)
     {
+        const taipeiTime = moment.tz('Asia/Taipei').format('YYYYMMDD');
+        const dayOfWeek = moment(taipeiTime).format('E');
+        const thisMonday = moment(taipeiTime).subtract(dayOfWeek - 1, 'days').format('YYYYMMDD');
+
         nodexj({
-            input: './xls/chinasuntv.xls', // input xls
+            input: `./xls/${thisMonday}chinasuntv.xls`, // input xls
             output: null, // output json
         }, (err, result) => {
             let arr = [];
