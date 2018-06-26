@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import isNode from 'detect-node';
 import DocumentMeta from 'react-document-meta';
 import update from 'immutability-helper';
-// import moment from 'moment';
+import moment from 'moment-timezone';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import ChinaSuntv from '../../components/chinaSuntv/chinaSuntv';
@@ -56,14 +56,18 @@ class Index extends React.Component
         this.props.actions.chinaSuntvAction.getChinaSuntv();
 
         setInterval(() => {
-            this.setState(update(this.state, {
-                nowTime: { $set: new Date() / 1 }
-            }));
-        }, 1000);
+            const taipeiTime = moment.tz('Asia/Taipei').format();
 
-        setInterval(() => {
-            this.props.actions.chinaSuntvAction.getChinaSuntv();
-        }, 10000);
+            this.setState(update(this.state, {
+                nowTime: { $set: new Date(taipeiTime) / 1 }
+            }), () => {
+                // 若現在時間 星期是禮拜一 且 時間是凌晨00:00:00整，更新節目表！
+                if (moment(this.state.nowTime).format('dddd') === 'Monday' && moment(this.state.nowTime).format('LTS') === '12:00:00 AM')
+                {
+                    this.props.actions.chinaSuntvAction.getChinaSuntv();
+                }
+            });
+        }, 1000);
     }
 
     // shouldComponentUpdate(nextProps)
@@ -154,6 +158,8 @@ class Index extends React.Component
                 week = info.week[today];
                 weekInfo = info.weekInfo[week];
             }
+
+            // console.log(weekInfo, play);
 
             return preNowNext[item].push(weekInfo[play].PlayTime.split(' ')[1], weekInfo[play].prgColumn, weekInfo[play].prgName);
         });

@@ -48,6 +48,23 @@ class ProgramList extends React.Component
 
         if (scroll !== null && !equal(nextProps, this.props))
         {
+            let obj = {
+                Mon: '',
+                Tue: '',
+                Wed: '',
+                Thu: '',
+                Fri: '',
+                Sat: '',
+                Sun: ''
+            };
+            const day = new Date().toString().slice(0, 3);
+
+            obj[day] += 'active';
+            this.day = day;
+            this.setState(update(this.state, {
+                tabs: { $set: obj }
+            }));
+
             scroll.parentNode.scrollTop = scroll.offsetTop - scroll.parentNode.offsetTop;
         }
     }
@@ -56,12 +73,16 @@ class ProgramList extends React.Component
     {
         const { now } = this.props.data.preNowNext;
         const scroll = document.querySelector('.scroll');
+        const nowTime = moment().format('HH:mm:ss');
 
         const hour = now[0].split(':')[0];
 
-        if (moment().format('HH:mm:ss') === (hour.length === 1 ? `0${now[0]}:01` : `${now[0]}:01`))
+        if (scroll !== null)
         {
-            scroll.parentNode.scrollTop = scroll.offsetTop - scroll.parentNode.offsetTop;
+            if (nowTime === (hour.length === 1 ? `0${now[0]}:01` : `${now[0]}:01`))
+            {
+                scroll.parentNode.scrollTop = scroll.offsetTop - scroll.parentNode.offsetTop;
+            }
         }
     }
 
@@ -140,7 +161,11 @@ class ProgramList extends React.Component
             const day = chineseWeek[weekDate];
 
             const content = (
-                <div key={week[key]} className={`${tabs[weekDate]}${todayDay === Number(key) + today || todayDay === Number(key) + yesterday || todayDay === Number(key) + tomorrow ? '' : ' hidden'}`} onClick={() => this.selectProgrmaList(weekDate)}>
+                <div
+                    key={week[key]}
+                    className={`${tabs[weekDate]}${todayDay === Number(key) + today || todayDay === Number(key) + yesterday || todayDay === Number(key) + tomorrow ? '' : ' hidden'}`}
+                    onClick={() => this.selectProgrmaList(weekDate)}
+                >
                     <div>{date}<span>{day}</span></div>
                 </div>
             );

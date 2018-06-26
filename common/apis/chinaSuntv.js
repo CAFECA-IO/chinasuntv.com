@@ -4,7 +4,7 @@ export function getChinaSuntv()
 {
     return new Promise((resolve, reject) =>
     {
-        get(`/api/chinaSuntv?date=${new Date() / 1}`)
+        get('/api/chinaSuntv')
             .set('Accept', 'application/json')
             .end((err, res) =>
             {
