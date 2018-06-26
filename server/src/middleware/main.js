@@ -43,6 +43,7 @@ export default function (app)
         }
 
         res.setHeader('Cache-Control', 'public, max-age=60000');
+        res.setHeader('Expires', new Date(Date.now() - 86400000));
 
         next();
     });
