@@ -95,8 +95,6 @@ class Index extends React.Component
         let today = (whichDay === 0) ? 6 : whichDay - 1;
         const { info } = this.props.chinaSuntv;
 
-        // console.log(info, new Date());
-
         // week:當天日期；weekInfo:當天節目表
         let week = info.week[today];
         let weekInfo = info.weekInfo[week];
@@ -129,7 +127,6 @@ class Index extends React.Component
 
         Object.keys(preNowNext).map((item, index) => {
             let play = prePlayed + index;
-            // console.log(play, item);
 
             // 若是當天最晚節目，要取到隔天的第一筆節目
             if (play === weekInfo.length)
@@ -141,7 +138,8 @@ class Index extends React.Component
             // 若現在時間是當天最早節目，要取到昨天的最後一筆節目
             else if (play === -1)
             {
-                week = info.week[whichDay - 1];
+                const day = whichDay - 1 <= 0 ? 0 : whichDay - 2;
+                week = info.week[day];
                 weekInfo = info.weekInfo[week];
                 play = weekInfo.length - 1;
             }
@@ -158,8 +156,6 @@ class Index extends React.Component
                 week = info.week[today];
                 weekInfo = info.weekInfo[week];
             }
-
-            // console.log(weekInfo, play);
 
             return preNowNext[item].push(weekInfo[play].PlayTime.split(' ')[1], weekInfo[play].prgColumn, weekInfo[play].prgName);
         });

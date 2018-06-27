@@ -42,7 +42,7 @@ export default function (app)
             res.setHeader('Content-Type', 'application/javascript');
         }
 
-        res.setHeader('Cache-Control', 'public, max-age=60000');
+        res.setHeader('Cache-Control', 'public, max-age=0');
 
         next();
     });
