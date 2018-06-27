@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import isNode from 'detect-node';
 import DocumentMeta from 'react-document-meta';
 import update from 'immutability-helper';
-// import moment from 'moment';
+import moment from 'moment-timezone';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import ChinaSuntv from '../../components/chinaSuntv/chinaSuntv';
@@ -56,14 +56,18 @@ class Index extends React.Component
         this.props.actions.chinaSuntvAction.getChinaSuntv();
 
         setInterval(() => {
-            this.setState(update(this.state, {
-                nowTime: { $set: new Date() / 1 }
-            }));
-        }, 1000);
+            const taipeiTime = moment.tz('Asia/Taipei').format();
 
-        setInterval(() => {
-            this.props.actions.chinaSuntvAction.getChinaSuntv();
-        }, 10000);
+            this.setState(update(this.state, {
+                nowTime: { $set: new Date(taipeiTime) / 1 }
+            }), () => {
+                // 若現在時間 星期是禮拜一 且 時間是凌晨00:00:00整，更新節目表！
+                if (moment(this.state.nowTime).format('dddd') === 'Monday' && moment(this.state.nowTime).format('LTS') === '12:00:00 AM')
+                {
+                    this.props.actions.chinaSuntvAction.getChinaSuntv();
+                }
+            });
+        }, 1000);
     }
 
     // shouldComponentUpdate(nextProps)
@@ -90,8 +94,6 @@ class Index extends React.Component
         // 減 1 找出在陣列中的 index
         let today = (whichDay === 0) ? 6 : whichDay - 1;
         const { info } = this.props.chinaSuntv;
-
-        // console.log(info, new Date());
 
         // week:當天日期；weekInfo:當天節目表
         let week = info.week[today];
@@ -125,7 +127,6 @@ class Index extends React.Component
 
         Object.keys(preNowNext).map((item, index) => {
             let play = prePlayed + index;
-            // console.log(play, item);
 
             // 若是當天最晚節目，要取到隔天的第一筆節目
             if (play === weekInfo.length)
@@ -137,7 +138,8 @@ class Index extends React.Component
             // 若現在時間是當天最早節目，要取到昨天的最後一筆節目
             else if (play === -1)
             {
-                week = info.week[whichDay - 1];
+                const day = whichDay - 1 <= 0 ? 0 : whichDay - 2;
+                week = info.week[day];
                 weekInfo = info.weekInfo[week];
                 play = weekInfo.length - 1;
             }
