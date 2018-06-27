@@ -43,6 +43,7 @@ export default function (app)
         }
 
         res.setHeader('Cache-Control', 'public, max-age=0');
+        res.setHeader('Expires', new Date().toUTCString());
 
         next();
     });
