@@ -27,7 +27,7 @@ class ChinaSuntv extends React.Component
     componentDidMount()
     {
         this.videoPlayer = videojs(this.player);
-        this.videoPlayer.src({ src: `https://stream.isuntv.com/680k/mid_video_index.m3u8?date=${new Date() / 1}` });
+        this.videoPlayer.src({ src: `https://stream.chinasuntv.com/680k/mid_video_index.m3u8?date=${new Date() / 1}` });
         setTimeout(() => {
             this.videoPlayer.play();
         }, 50);
