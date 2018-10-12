@@ -6,7 +6,7 @@ module.exports = {
     apps: [
         {
             name: 'iSuntvLive',
-            script: 'build/server.js',
+            script: 'source/build/server.js',
             log_date_format: 'YYYY-MM-DD',
             watch: [
                 'build', 'public', 'locales'
@@ -29,10 +29,7 @@ module.exports = {
             ref: 'origin/master',
             repo: 'https://white87332@bitbucket.org/tidenet/isuntvlive.git',
             path: '/home/ubuntu/workspace/isuntvlive',
-            'post-deploy': 'npm i && pm2 reload /home/ubuntu/workspace/isuntvlive/ecosystem.config.js',
-            env: {
-                NODE_ENV: 'production'
-            }
+            'post-deploy': '. ~/.profile && yarn && yarn build && pm2 reload /home/ubuntu/workspace/isuntvlive/source/ecosystem.config.js',
         }
     }
 };
