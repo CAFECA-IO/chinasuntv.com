@@ -42,7 +42,7 @@ module.exports = {
     },
     
     plugins: [
-        new CleanWebpackPlugin(['./public/asset/js/bundle', './build']),
+        new CleanWebpackPlugin(['./build']),
         new webpack.IgnorePlugin(/\.(css|less|scss|svg|png|jpe?g|png)$/),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
