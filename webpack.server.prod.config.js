@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const fs = require('fs');
 const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 function getExternals()
 {
@@ -39,7 +40,9 @@ module.exports = {
         ],
         exprContextCritical: false
     },
+    
     plugins: [
+        new CleanWebpackPlugin(['./build']),
         new webpack.IgnorePlugin(/\.(css|less|scss|svg|png|jpe?g|png)$/),
         new webpack.LoaderOptionsPlugin({
             minimize: true,

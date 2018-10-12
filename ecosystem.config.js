@@ -6,7 +6,7 @@ module.exports = {
     apps: [
         {
             name: 'iSuntvLive',
-            script: 'source/build/server.js',
+            script: 'build/server.js',
             log_date_format: 'YYYY-MM-DD',
             watch: [
                 'build', 'public', 'locales'

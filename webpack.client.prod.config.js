@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry:
@@ -55,6 +56,7 @@ module.exports = {
         moduleExtensions: ['-loader']
     },
     plugins: [
+        new CleanWebpackPlugin(['./public/asset/js/bundle']),
         new webpack.DefinePlugin({ 'process.env.NODE_ENV': '\'production\'' }),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
@@ -77,6 +79,7 @@ module.exports = {
             },
             comments: false
         }),
+        
         new ExtractTextPlugin({
             filename: '../../css/bundle/bundle.min.css',
             allChunks: true
