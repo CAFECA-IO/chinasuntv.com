@@ -36,8 +36,7 @@ function loadBranchData(branch, dispatch, url, query)
 
 function videoJsScript()
 {
-    return `<script src='/asset/js/videojs/videojs.min.js'></script>
-          <script src='/asset/js/videojs/videojs-contrib-hls.min.js'></script>`;
+    return "<script src='https://content.jwplatform.com/libraries/ckPPjaGn.js'></script>";
 }
 
 export default function render(app)
