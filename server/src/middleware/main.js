@@ -27,26 +27,22 @@ export default function (app)
         httpOnly: true,
         secure: false
     }));
+
     app.use((req, res, next) =>
     {
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With');
         res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-        // res.header('Access-Control-Allow-Credentials', 'true');
-        next();
-    });
-    app.use((req, res, next) =>
-    {
+        res.header('Cache-Control', 'no-cache');
+
         if (req.url.indexOf('.js') !== -1)
         {
             res.setHeader('Content-Type', 'application/javascript');
         }
 
-        res.setHeader('Cache-Control', 'public, max-age=0');
-        res.setHeader('Expires', new Date().toUTCString());
-
         next();
     });
+
     app.use((req, res, next) =>
     {
         if (undefined === req.universalCookies.get('iSuntvLive'))
@@ -60,6 +56,7 @@ export default function (app)
         req.i18n.translator.language = req.i18n.language;
         next();
     });
+
     app.use((req, res, next) =>
     {
         res.result = {
