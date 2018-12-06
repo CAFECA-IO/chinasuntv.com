@@ -29,7 +29,7 @@ module.exports = {
             ref: 'origin/master',
             repo: 'https://white87332@bitbucket.org/tidenet/isuntvlive.git',
             path: '/home/ubuntu/workspace/isuntvlive',
-            'post-deploy': '. ~/.profile && yarn && yarn build && pm2 reload /home/ubuntu/workspace/isuntvlive/source/ecosystem.config.js',
+            'post-deploy': '. ~/.profile && yarn && yarn build && sudo pm2 reload /home/ubuntu/workspace/isuntvlive/source/ecosystem.config.js',
         }
     }
 };
