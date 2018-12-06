@@ -12,7 +12,7 @@ import i18n from '../i18n/i18n-server';
 export default function (app)
 {
     app.use((req, res, next) => {
-        if (req.protocol === 'http' && req.headers.host.indexOf(':3000') !== -1)
+        if (req.protocol === 'http' && req.headers.host.indexOf(':3000') === -1)
         {
             res.redirect(307, `https://${req.headers.host}${req.url}`);
         }
