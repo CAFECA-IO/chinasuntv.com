@@ -24,19 +24,20 @@ const server = http.createServer(app).listen(httpPort, () => {
     }
 });
 
-/* eslint no-console: ["error", { allow: ["log"] }] */
-console.log(`http happens on port ${httpPort}`);
-
-// https
-if (fs.existsSync('./cert/server.pfx'))
+if (process.platform === 'linux')
 {
     const options = {
-        pfx: fs.readFileSync('../cert/server.pfx'),
-        passphrase: 'password',
+        // Private key
+        key: fs.readFileSync('/etc/letsencrypt/live/chinasuntv.com/privkey.pem'),
+
+        // Fullchain file or cert file (prefer the former)
+        cert: fs.readFileSync('/etc/letsencrypt/live/chinasuntv.com/fullchain.pem'),
     };
 
     https.createServer(options, app).listen(httpsPort);
-    console.log(`http happens on port ${httpsPort}`);
+
+    /* eslint no-console: ["error", { allow: ["log"] }] */
+    console.log(`https happens on port ${httpsPort}`);
 }
 
 // mkfir logs
