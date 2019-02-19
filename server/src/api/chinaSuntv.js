@@ -1,6 +1,6 @@
 import nodexj from 'xls-to-json';
 import moment from 'moment-timezone';
-
+const fs = require('fs');
 
 export default
 {
@@ -19,9 +19,14 @@ export default
         const taipeiTime = moment.tz('Asia/Taipei').format('YYYYMMDD');
         const dayOfWeek = moment(taipeiTime).format('E');
         const thisMonday = moment(taipeiTime).subtract(dayOfWeek - 1, 'days').format('YYYYMMDD');
+        let readFile = `./xls/${thisMonday}chinasuntv.xls`;
+        if(!fs.existsSync(readFile)) {
+            const fArr = fs.readdirSync('./xls').sort();
+            readFile = fArr[fArr.length - 1];
+        }
 
         nodexj({
-            input: `./xls/${thisMonday}chinasuntv.xls`, // input xls
+            input: readFile, // input xls
             output: null, // output json
         }, (err, result) => {
             let arr = [];
