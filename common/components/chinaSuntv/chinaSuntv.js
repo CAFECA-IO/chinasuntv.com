@@ -28,7 +28,7 @@ class ChinaSuntv extends React.Component
     {
         const playerInstance = jwplayer(this.player);
         playerInstance.setup({
-            file: 'https://stream.chinasuntv.com/680k/mid_video_index.m3u8',
+            file: `https://stream.chinasuntv.com/680k/mid_video_index.m3u8?${new Date().getTime()}`,
             mediaid: '7uAy64Hk'
         });
         // this.videoPlayer = videojs(this.player);
