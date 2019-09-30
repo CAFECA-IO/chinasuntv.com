@@ -27,7 +27,7 @@ module.exports = {
             key: `${process.env.HOME}/Documents/ssh/chinaiSun.pem`,
             host: '54.65.45.58',
             ref: 'origin/master',
-            repo: 'https://white87332@bitbucket.org/tidenet/isuntvlive.git',
+            repo: 'https://luphia@bitbucket.org/tidenet/isuntvlive.git',
             path: '/home/ubuntu/workspace/isuntvlive',
             'post-deploy': '. ~/.profile && yarn && yarn build && sudo pm2 reload /home/ubuntu/workspace/isuntvlive/source/ecosystem.config.js',
         }
