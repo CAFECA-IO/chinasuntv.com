@@ -60,8 +60,7 @@ class About extends React.Component
                             <div className="rect" />
                             <div className="subTitle">接收陽光衛視</div>
                             <div className="content">
-                                陽光衛視在亞3-S衛星（東經105.5度）C波段及新天11號衛星KU波段上播出。亞3-S播出參數：下行頻率03880，符號率27500，極性“水準”，亞洲地區用1.5米直徑的正饋天線可以穩定收視。<br />
-                                新天11號播出參數：下行頻率12731，符號率30000，極性“垂直”。
+                            陽光衛視在亞洲衛星9號（東經122.0度）C波段上播出。訊號接收參數為：下行頻率04180、符號率30.83Msps、極性"垂直"、類型DVB-S2。
                             </div>
                         </div>
 
