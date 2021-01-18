@@ -60,7 +60,7 @@ class About extends React.Component
                             <div className="rect" />
                             <div className="subTitle">接收陽光衛視</div>
                             <div className="content">
-                            陽光衛視在亞洲衛星9號（東經122.0度）C波段上播出。訊號接收參數為：下行頻率04180、符號率30.83Msps、極性"垂直"、類型DVB-S2。
+                              陽光衛視在亞洲衛星9號（東經122.0度）C波段上播出。訊號接收參數為：下行頻率04180、符號率30.83Msps、極性"垂直"、類型DVB-S2。
                             </div>
                         </div>
 
